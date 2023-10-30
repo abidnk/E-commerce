@@ -1,0 +1,30 @@
+.middle-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  
+  .middle-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .middle-image .overlapping-image {
+    position: absolute;
+    top: 42%;
+    left: 102%;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .middle-image img {
+      width: 50%;
+    }
+  
+    .middle-image .overlapping-image {
+      top: 21%;
+      left: 51%;
+    }
+  }
+  

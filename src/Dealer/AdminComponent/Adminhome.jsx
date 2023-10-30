@@ -1,10 +1,11 @@
-import Adminsidebar from "./Adminsidebar";
+import AdmNavBar from "./AdmNavBar";
+
 
 
 const Adminhome = () => {
   return (
    <>
-   <Adminsidebar/>
+   <AdmNavBar/>
    </>
   );
 };
