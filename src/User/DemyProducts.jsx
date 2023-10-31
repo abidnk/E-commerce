@@ -1,4 +1,4 @@
-export const CardProduct = [
+const CardProduct = [
     {
       id: 1,
       name: "X1",
@@ -109,3 +109,6 @@ export const CardProduct = [
         qty: 1,
     },
 ];
+
+
+export default CardProduct
