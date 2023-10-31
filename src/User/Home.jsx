@@ -5,7 +5,7 @@ import NavBar from "./NavBar"
 import { useDispatch } from "react-redux";
 import{display} from '../redux/ProdctSlice'
 import CardProduct from '../User/DemyProducts'
-import Card from '../User/Card'
+import Slider from "./Slider";
 
 const Home = () => {
 
@@ -25,7 +25,8 @@ dispatch(display({CardProduct}))
         <Carousel/>
         
         <MiddleImage/>
-      <Card/>
+        <Slider/>
+      
         </>
     )
 }
