@@ -10,7 +10,7 @@ const Card = () => {
  
 
   return (
-    <div className="card-container" style={{ display: 'flex', overflowX: 'auto' }}>
+    <div className="card-container" style={{ display: 'flex' }}>
       <div className="card-row" style={{ display: 'flex', flexWrap: 'nowrap', gap: '10px' }}>
         {prd?.map((product) => (
           <div key={product?.id} className='card' style={{ width: '190px' }}>

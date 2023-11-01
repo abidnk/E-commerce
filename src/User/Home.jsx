@@ -10,20 +10,11 @@ import Slider from "./Slider";
 const Home = () => {
 
 const dispatch=useDispatch()
-    useEffect(()=>{
-
-
-
-
-dispatch(display({CardProduct}))
-
-
-    },[dispatch])
+    dispatch(display({CardProduct}))
     return(
         <>
         <NavBar/>
         <Carousel/>
-        
         <MiddleImage/>
         <Slider/>
       

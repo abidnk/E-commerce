@@ -27,7 +27,7 @@ const MultiCarousel = () => {
     
       <div className="product-carousel">
         <h1>Our Ebike Range</h1>
-      
+    
       <Carousel 
         swipeable={false}
         draggable={false}

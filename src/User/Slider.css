@@ -3,29 +3,42 @@
     margin: 0;
     box-sizing: border-box;
   }
-  body{
+  
+  body {
     background: #000;
   }
   
   .slider {
-    margin:0 20px;
-    overflow:"hidden";
-    padding:2rem 0;
+    margin: 0 20px;
+    overflow: hidden; /* corrected value */
+    padding: 2rem 0;
   }
   
   .slider img {
     width: 100%;
-    border-radius:10px;
+    border-radius: 10px;
   }
   
   .react-multi-carousel-list {
-  padding: 0rem 0 2rem 0;
+    padding: 0 0 2rem 0; /* corrected value */
   }
   
-  .custom-dot-list-style button{
-  border: none;
-  background: rgb(255, 68, 68);
+  .custom-dot-list-style button {
+    border: none;
+    background: rgb(255, 68, 68);
   }
-  .react-multi-carousel-dot.react-multi-carousel-dot--active button{
-  background: rgb(255, 68, 68) !important;
+  
+  .react-multi-carousel-dot.react-multi-carousel-dot--active button {
+    background: rgb(255, 68, 68) !important;
+  }
+  .parent{
+    margin-top: 200px;
+    margin-left: 80px;
+    
+  }
+  .react-multiple-carousel{
+    margin-left: 200px;
+  }
+  .card{
+    justify-content: center;
   }
