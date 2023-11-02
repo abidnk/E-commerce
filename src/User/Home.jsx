@@ -7,6 +7,11 @@ import{display} from '../redux/ProdctSlice'
 import CardProduct from '../User/DemyProducts'
 import Slider from "./Slider";
 import Footer from "./Footer";
+import Categories from "./Categories";
+import FooterImage from "./FooterImage";
+import Xfactor from "./Xfactor";
+import XfactorHome from "./XfactorHome";
+import EliteHome from "./EliteHome";
 
 const Home = () => {
 
@@ -14,11 +19,15 @@ const dispatch=useDispatch()
     dispatch(display({CardProduct}))
     return(
         <>
-        <NavBar/>
+        {/* <NavBar/>
         <Carousel/>
+        <Categories/>
         <MiddleImage/>
         <Slider/>
-        <Footer/>
+        <FooterImage/>
+        <Footer/> */}
+        {/* <XfactorHome/> */}
+        <EliteHome/>
         </>
     )
 }

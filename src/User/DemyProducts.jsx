@@ -82,7 +82,7 @@ const CardProduct = [
         id: 9,
         name: "T-REX+",
         type: "Desire",
-        src: 'src/assets/img/Desire/T-REX+.png',
+        src: 'src/assets/img/Desire/T-Rex+.png',
         discription: "Traverse through town and trails without fuss or effort! India's first dual suspension e-cycle, EMX+, offers a comfy ride and the power to cruise. Designed to flash past city traffic, beat uneven roads into submission, and tear through the steepest of slopes - it's always got your back!",
         price: "28,566 ",
         old :"30,000" ,

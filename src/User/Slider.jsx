@@ -50,13 +50,15 @@ const Slider = () => {
               />
               <h2 style={{color:'black'}}>{product?.name}</h2>
               <h6>{product?.discription}</h6>
+              <hr/>
               <h5
                 className="oldprice"
                 style={{ textDecoration: "line-through" }}
               >
-                {product?.old}
+                ₹{product?.old}
               </h5>
-              <h4 className="price" style={{color:'black'}}>{product?.price}</h4>
+              <h4 className="price" style={{color:'black'}}>₹{product?.price}</h4>
+             
 
               <button
                 style={{

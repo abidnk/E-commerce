@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 const App = () => {
-    const [products, setProducts] = useState();
+    // const [products, setProducts] = useState();
     return(
         
         <Home/>

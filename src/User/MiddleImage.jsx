@@ -58,10 +58,10 @@
 
 
 import React from 'react';
-
+import './MiddleImage.css'
 const MiddleImage = ()=>  {
   return (
-    <div className='mt-5' style={{ position: 'relative', maxWidth: '100%', minWidth: '320px' }}>
+    <div className='image' style={{ position: 'relative', maxWidth: '100%', minWidth: '320px' }}>
       <img
         src='src/assets/img/Screenshot from 2023-10-29 16-32-17.png'
         alt='Pani Pali'
