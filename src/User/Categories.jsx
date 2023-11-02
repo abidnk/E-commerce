@@ -10,10 +10,13 @@ import {
   MDBCol
 } from 'mdb-react-ui-kit';
 import './Categories.css'
+import { Link } from 'react-router-dom';
 export default function Categories() {
   return (
     <MDBRow className='row-cols-1 row-cols-md-3 g-1'>
+        <Link to='/xfactor'>
       <MDBCol>
+        
         <MDBCard className='h-100'style={{ width: '300px' }}>
           <MDBCardImage
             src='src/assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
@@ -22,6 +25,8 @@ export default function Categories() {
           />
         </MDBCard>
       </MDBCol>
+      </Link>
+      <Link to='/desire'>
       <MDBCol>
         <MDBCard className='h-100'style={{ width: '300px' }}>
           <MDBCardImage
@@ -31,6 +36,8 @@ export default function Categories() {
           />
         </MDBCard>
       </MDBCol>
+      </Link>
+      <Link to='/elite'>
       <MDBCol>
         <MDBCard className='h-100'style={{ width: '300px' }}>
           <MDBCardImage
@@ -40,6 +47,7 @@ export default function Categories() {
           />
         </MDBCard>
       </MDBCol>
+      </Link>
     </MDBRow>
   );
 }

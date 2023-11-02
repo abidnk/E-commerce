@@ -8,21 +8,20 @@ import {
     MDBCardImage,
   } from "mdb-react-ui-kit";
   import { useSelector } from "react-redux";
-  import Footer from "./Footer";
-  import NavBar from "./NavBar";
   
-  const Elite = () => {
+  
+  const Desire = () => {
       const selectData = (state) => state.product;
     const productsObject = useSelector(selectData);
     const prd = productsObject?.CardProduct;
    
-      const data =prd.filter((item) => item.type==="Elite")
+      const data =prd.filter((item) => item.type==="Desire")
       console.log(data);
       return (
   <>
         
         <div className="view container mt-5" >
-            <h1>Our Elite Ebike Range</h1>
+        <h1>Our Desire Ebike Range</h1>
           {data.map((item) => (
             <div key={item.id}>
               <div>
@@ -44,7 +43,7 @@ import {
                        >
                        ₹{item.old}
                        </h4>
-                      <h2> ₹{item.price}</h2>
+                      <h2>₹{item.price}</h2>
                       <p>{item.discription}</p>
   
                       <div className="contu">
@@ -77,5 +76,4 @@ import {
       </>
         );
       };
-      export default Elite 
-    
+      export default Desire;

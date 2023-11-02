@@ -12,6 +12,8 @@ import FooterImage from "./FooterImage";
 import Xfactor from "./Xfactor";
 import XfactorHome from "./XfactorHome";
 import EliteHome from "./EliteHome";
+import Desire from "./Desire";
+import DesireHome from "./DesireHome";
 
 const Home = () => {
 
@@ -19,15 +21,16 @@ const dispatch=useDispatch()
     dispatch(display({CardProduct}))
     return(
         <>
-        {/* <NavBar/>
+        <NavBar/>
         <Carousel/>
         <Categories/>
         <MiddleImage/>
         <Slider/>
         <FooterImage/>
-        <Footer/> */}
+        <Footer/>
         {/* <XfactorHome/> */}
-        <EliteHome/>
+        {/* <EliteHome/> */}
+        {/* <DesireHome/> */}
         </>
     )
 }

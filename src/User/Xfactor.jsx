@@ -12,9 +12,14 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 
 const Xfactor = () => {
+
     const selectData = (state) => state.product;
+
   const productsObject = useSelector(selectData);
+
   const prd = productsObject?.CardProduct;
+
+  console.log(prd,"'dfaldffslafsad")
  
     const data =prd.filter((item) => item.type==="X-factor")
     console.log(data);
@@ -23,7 +28,7 @@ const Xfactor = () => {
       
       <div className="view container mt-5" >
       <h1>Our X-Factor Ebike Range</h1>
-        {data.map((item) => (
+        {data?.map((item) => (
           <div key={item.id}>
             <div>
               <MDBRow className="g-0 bg-light position-relative">
@@ -38,7 +43,13 @@ const Xfactor = () => {
                 >
                   <div className="viewright-down bg-">
                     <h1 className="mt-0">{item.name} </h1>
-                    <h2>Rs{item.price}</h2>
+                    <h4
+                      className="oldprice"
+                       style={{ textDecoration: "line-through" }}
+                       >
+                       ₹{item.old}
+                       </h4>
+                    <h2> ₹{item.price}</h2>
                     <p>{item.discription}</p>
 
                     <div className="contu">

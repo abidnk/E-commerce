@@ -1,26 +1,26 @@
 import React from 'react'
-import Xfactor from './Xfactor'
 import NavBar from './NavBar'
 import Footer from './Footer'
+import Desire from './Desire'
 
-const XfactorHome = () => {
+const DesireHome= () => {
   return (
 
-
    
-        <div >
+        <div>
         <NavBar/>
       <img
-        src='src/assets/img/X-factor/X-factorHeader.png'
+        src='src/assets/img/Desire/Elite Header image.png'
         alt='pinnem Pani Pali'
         style={{ width: '100%', height: 'auto' }}
       />
+    
 
-        <Xfactor/>
+        <Desire/>
         <Footer/>
 
     </div>
   )
 }
 
-export default XfactorHome
+export default  DesireHome
