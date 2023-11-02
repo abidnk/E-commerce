@@ -27,6 +27,7 @@ const Slider = () => {
   console.log(prd);
   return (
     <div className="parent">
+      <h1>Our Ebike Range</h1>
       <Carousel
         responsive={responsive}
         autoPlay={true}
@@ -35,20 +36,41 @@ const Slider = () => {
         showDots={false}
         infinite={true}
         partialVisible={true}
-        dotListClass="custom-dot-list-style" 
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding"
+        customTransition="transform 300ms ease-in"
       >
         {prd?.map((product) => (
-          <div key={product?.id} className="card" style={{width:250 }}>
-            <img
-              className="product-img"
-              src={product?.src}
-              alt={`Product: ${product?.name}`}
-            />
-            <h2>{product?.name}</h2>
-            <p className="price">{product?.price}</p>
-            <p>
-              <button>Buy Now</button>
-            </p>
+          <div className="bigcard">
+            <div key={product?.id} className="card" style={{ width: 450 }}>
+              <img
+                className="product-img"
+                src={product?.src}
+                alt={`Product: ${product?.name}`}
+              />
+              <h2 style={{color:'black'}}>{product?.name}</h2>
+              <h6>{product?.discription}</h6>
+              <h5
+                className="oldprice"
+                style={{ textDecoration: "line-through" }}
+              >
+                {product?.old}
+              </h5>
+              <h4 className="price" style={{color:'black'}}>{product?.price}</h4>
+
+              <button
+                style={{
+                  background: "black",
+                  color: "white",
+                  fontSize: "16px",
+                  cursor: "pointer",
+                  border: "1px solid black",
+                  padding: "15px 25px",
+                }}
+              >
+                BUY NOW
+              </button>
+            </div>
           </div>
         ))}
       </Carousel>

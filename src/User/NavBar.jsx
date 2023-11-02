@@ -15,38 +15,40 @@ import {
   MDBDropdownItem,
   MDBCollapse,
 } from 'mdb-react-ui-kit';
+import "./NavBar.css"
 
 export default function NavBar() {
   const [showBasic, setShowBasic] = useState(false);
 
   return (
-    <MDBNavbar expand='lg' light bgColor='light'>
+    <MDBNavbar expand='lg' sticky  bgColor='black' className='navbar' >
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Brand</MDBNavbarBrand>
+      <img src="src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
 
         <MDBNavbarToggler
+        
           aria-controls='navbarSupportedContent'
           aria-expanded='false'
           aria-label='Toggle navigation'
           onClick={() => setShowBasic(!showBasic)}
         >
-          <MDBIcon icon='bars' fas />
+          <MDBIcon icon='bars' fas style={{color:'white'}}/>
         </MDBNavbarToggler>
 
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current='page' href='#'>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='#'>
                 Home
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='#'>Link</MDBNavbarLink>
+              <MDBNavbarLink href='#' style={{color:'white'}}>Link</MDBNavbarLink>
             </MDBNavbarItem>
 
             <MDBNavbarItem>
               <MDBDropdown>
-                <MDBDropdownToggle tag='a' className='nav-link' role='button'>
+                <MDBDropdownToggle tag='a' className='nav-link' style={{color:'white'}} role='button'>
                   Dropdown
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
@@ -58,7 +60,7 @@ export default function NavBar() {
             </MDBNavbarItem>
 
             <MDBNavbarItem>
-              <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
+              <MDBNavbarLink disabled href='#' tabIndex={-1} style={{color:'white'}} aria-disabled='true'>
                 Disabled
               </MDBNavbarLink>
             </MDBNavbarItem>
@@ -66,7 +68,7 @@ export default function NavBar() {
 
           <form className='d-flex input-group w-auto'>
             <input type='search' className='form-control' placeholder='Type query' aria-label='Search' />
-            <MDBBtn color='primary'>Search</MDBBtn>
+            <MDBBtn color='dark'>Search</MDBBtn>
           </form>
         </MDBCollapse>
       </MDBContainer>
