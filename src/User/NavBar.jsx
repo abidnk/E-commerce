@@ -16,7 +16,7 @@ import {
   MDBCollapse,
 } from 'mdb-react-ui-kit';
 import "./NavBar.css"
-
+import { Link } from 'react-router-dom';
 export default function NavBar() {
   const [showBasic, setShowBasic] = useState(false);
 
@@ -49,12 +49,12 @@ export default function NavBar() {
             <MDBNavbarItem>
               <MDBDropdown>
                 <MDBDropdownToggle tag='a' className='nav-link' style={{color:'white'}} role='button'>
-                  Dropdown
+                  Categories
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link>Action</MDBDropdownItem>
-                  <MDBDropdownItem link>Another action</MDBDropdownItem>
-                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
+                <Link to='/xfactor'><MDBDropdownItem link>X-Factor</MDBDropdownItem></Link>
+                  <Link to='/desire'> <MDBDropdownItem link>Desire</MDBDropdownItem></Link>
+                 <Link to='/elite'><MDBDropdownItem link >Elite</MDBDropdownItem></Link>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>

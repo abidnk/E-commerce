@@ -8,8 +8,7 @@ import {
     MDBCardImage,
   } from "mdb-react-ui-kit";
   import { useSelector } from "react-redux";
-  import Footer from "./Footer";
-  import NavBar from "./NavBar";
+
   
   const Elite = () => {
       const selectData = (state) => state.product;
@@ -50,7 +49,7 @@ import {
                       <div className="contu">
                         <div>
                           <span role="img" aria-label="star">
-                            ⭐️⭐️⭐️⭐️⭐️ (276+ user Ratings)
+                          <i class="a-icon a-icon-star a-star-4 cm-cr-review-stars-spacing-big"><span class="a-icon-alt">4.1 out of 5 stars</span></i> (276+ user Ratings)
                           </span>
                           
                         </div>
