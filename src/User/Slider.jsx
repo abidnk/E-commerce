@@ -3,6 +3,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./Slider.css";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+
+
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -59,19 +63,21 @@ const Slider = () => {
               </h5>
               <h4 className="price" style={{color:'black'}}>₹{product?.price}</h4>
              
-
+              <Link to={`/add/${product.id}`}>
               <button
                 style={{
                   background: "black",
                   color: "white",
                   fontSize: "16px",
                   cursor: "pointer",
+                  
                   border: "1px solid black",
                   padding: "15px 25px",
                 }}
               >
                 BUY NOW
               </button>
+              </Link>
             </div>
           </div>
         ))}

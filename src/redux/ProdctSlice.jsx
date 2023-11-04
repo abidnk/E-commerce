@@ -10,7 +10,11 @@ const productSlice = createSlice({
             return action.payload;
 
         }
-        
+        ,
+        isLoggedIn:(state,action) => {
+
+            return true
+        }
     }
 })
 

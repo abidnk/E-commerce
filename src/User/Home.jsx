@@ -14,8 +14,9 @@ import XfactorHome from "./XfactorHome";
 import EliteHome from "./EliteHome";
 import Desire from "./Desire";
 import DesireHome from "./DesireHome";
+import ViewProduct from "./ViewProduct";
 
-const Home = () => {
+const  Home = () => {
 
 const dispatch=useDispatch()
     dispatch(display({CardProduct}))
@@ -31,6 +32,7 @@ const dispatch=useDispatch()
         {/* <XfactorHome/> */}
         {/* <EliteHome/> */}
         {/* <DesireHome/> */}
+        <ViewProduct/>
         </>
     )
 }

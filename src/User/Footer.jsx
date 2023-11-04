@@ -14,7 +14,7 @@ export default function Footer() {
       <MDBContainer className='p-4'>
         <MDBRow>
           <MDBCol lg="6" md="12" className='mb-4 mb-md-0'>
-            <img src="src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
+            <img src="/src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
 
             <p className='footer-content'> 
             EMotorad (EM) is an electric vehicle company that strives to bring futuristic ebikes at an affordable price for adventure seekers, daily commuters, or casual riders.<br/>
