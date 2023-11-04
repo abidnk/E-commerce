@@ -9,8 +9,8 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { useNavigate, useParams } from "react-router-dom";
-import Footer from "./Footer";
-import NavBar from "./NavBar";
+import Footer from "../Footer";
+import NavBar from "../NavBar";
 import { useSelector } from "react-redux";
 
 const ViewProduct = () => {
@@ -35,7 +35,7 @@ const ViewProduct = () => {
           <div key={item.id}>
             <div>
               <MDBRow className="g-0 bg-light position-relative">
-                <MDBCol md="6" className="mb-md-0 p-md-4">
+                <MDBCol md="6" className="mb-md-0 p-md-4 mt-5">
                   <img src={item.src} className="img-fluid" alt="okdaa" />
                 </MDBCol>
 
@@ -46,8 +46,14 @@ const ViewProduct = () => {
                 >
                   <div className="viewright-down bg-">
                     <h1 className="mt-0">{item.name} </h1>
+                    <h4
+                className="oldprice"
+                style={{ textDecoration: "line-through" }}
+              >
+                ₹{item?.old}
+              </h4>
                     <h2>Rs{item.price}</h2>
-                    <h4>{item.discription}</h4>
+                    
 
                     <div className="contu">
                       
