@@ -9,7 +9,7 @@ import Slider from "../Slider";
 import Footer from "../Footer";
 import Categories from "../Categories";
 import FooterImage from "../FooterImage";
-import Accessories from "../Accessories";
+import Accessories from "./Accessories";
 
 
 const  Home = () => {

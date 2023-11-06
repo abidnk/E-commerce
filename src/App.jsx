@@ -6,7 +6,7 @@ import XfactorHome from "./User/Pages/XfactorHome";
 import EliteHome from "./User/Pages/EliteHome";
 import DesireHome from "./User/Pages/DesireHome";
 import ViewProduct from "./User/Pages/ViewProduct";
-import Accessories from "./User/Accessories";
+import Accessories from "./User/Pages/Accessories";
 
 
 
