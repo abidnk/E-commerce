@@ -39,6 +39,7 @@ const Slider = () => {
         draggable={true}
         showDots={false}
         infinite={true}
+        
         partialVisible={true}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding"

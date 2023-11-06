@@ -1,7 +1,7 @@
 import React from 'react'
-import NavBar from '../NavBar'
-import Footer from '../Footer'
-import Desire from '../Desire'
+import NavBar from '../Components/NavBar'
+import Footer from '../Components/Footer'
+import Desire from '../Components/Desire'
 
 const DesireHome= () => {
   return (

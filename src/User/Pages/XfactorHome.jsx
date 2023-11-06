@@ -1,7 +1,7 @@
 import React from 'react'
-import Xfactor from '../Xfactor'
-import NavBar from '../NavBar'
-import Footer from '../Footer'
+import Xfactor from '../Components/Xfactor'
+import NavBar from '../Components/NavBar'
+import Footer from '../Components/Footer'
 
 const XfactorHome = () => {
   return (

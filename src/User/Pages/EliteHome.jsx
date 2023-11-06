@@ -1,7 +1,7 @@
 import React from 'react'
-import NavBar from '../NavBar'
-import Elite from '../Elite'
-import Footer from '../Footer'
+import NavBar from '../Components/NavBar'
+import Elite from '../Components/Elite'
+import Footer from '../Components/Footer'
 
 const EliteHome = () => {
   return (

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import Carousel from "../Carousel";
-import MiddleImage from "../MiddleImage";
-import NavBar from "../NavBar"
+import Carousel from "../Components/Carousel";
+import MiddleImage from "../Components/MiddleImage";
+import NavBar from "../Components/NavBar"
 import { useDispatch } from "react-redux";
 import{display} from '../../redux/ProdctSlice'
-import CardProduct from '../DemyProducts'
-import Slider from "../Slider";
-import Footer from "../Footer";
-import Categories from "../Categories";
-import FooterImage from "../FooterImage";
+import CardProduct from '../Components/DemyProducts'
+import Slider from "../Components/Slider";
+import Footer from "../Components/Footer";
+import Categories from "../Components/Categories";
+import FooterImage from "../Components/FooterImage";
 import Accessories from "./Accessories";
 
 
