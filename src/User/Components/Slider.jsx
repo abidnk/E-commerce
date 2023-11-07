@@ -28,7 +28,7 @@ const Slider = () => {
   const selectData = (state) => state.product;
   const productsObject = useSelector(selectData);
   const prd = productsObject?.CardProduct;
-  console.log(prd);
+ 
   return (
     <div className="parent">
       <h1>Our Ebike Range</h1>
@@ -46,8 +46,8 @@ const Slider = () => {
         customTransition="transform 300ms ease-in"
       >
         {prd?.map((product) => (
-          <div className="bigcard">
-            <div key={product?.id} className="card" style={{ width: 450 }}>
+          <div className="bigcard"  style={{}}>
+            <div key={product?.id} className="card" style={{ width: 450}}>
               <img
                 className="product-img"
                 src={product?.src}

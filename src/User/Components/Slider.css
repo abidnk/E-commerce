@@ -6,6 +6,7 @@
   
   body {
     background: #000;
+   
   }
   
   .slider {
@@ -43,6 +44,7 @@
     margin-top: 50px;
     margin-left: 100px;
     margin-right: 100px;
+    box-shadow: initial;
   }
   .parent{
     margin-top: 100px;
