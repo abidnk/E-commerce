@@ -25,7 +25,7 @@ const responsive = {
   },
 };
 const Slider = () => {
-  const selectData = (state) => state.product;
+  const selectData = (state) => state.products;
   const productsObject = useSelector(selectData);
   const prd = productsObject?.CardProduct;
  
