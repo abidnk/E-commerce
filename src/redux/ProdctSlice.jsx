@@ -1,23 +1,27 @@
-
 import { createSlice } from "@reduxjs/toolkit";
-// import { CardProduct } from "../User/DemyProducts";
 
 const productSlice = createSlice({
-    name:"product",
-    initialState:[],
-    reducers:{
-        display:(state,action)=>{
+    name: "product",
+    initialState: {
+      products: [],
 
-            return action.payload;
+      token: localStorage.getItem('token') || null,
+    },
+    reducers: {
+          setToken:(state, action) => {
+            state.token = action.payload;
+            localStorage.setItem('token' , action.payload)
+            console.log(state.token);
+          }
+    }, 
+    addProduct: (state, action) => {
+      const newProduct = action.payload;
+      state.products = [...state.products, newProduct];
+      console.log(state.products);
+    },
+  });
+  
 
-        }
-        ,
-        isLoggedIn:(state,action) => {
-             console.log(action);
-            return true
-        }
-    }
-})
-
-export const {display}=productSlice.actions
-export default productSlice.reducer
+export const { setToken} = productSlice.actions;
+export const selectToken = (state) => state.product.token;
+export default productSlice.reducer;

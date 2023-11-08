@@ -23,7 +23,7 @@ export default function NavBar() {
   return (
     <MDBNavbar expand='lg' sticky  bgColor='black' className='navbar' >
       <MDBContainer fluid>
-      <img src="/src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
+      <img src="src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
 
         <MDBNavbarToggler
         

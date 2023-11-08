@@ -7,12 +7,14 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { useDispatch } from "react-redux";
-import { isLoggedIn } from "../../redux/ProdctSlice";
 import axios from "axios";
-function Login() {
- 
+import { setToken } from "../../redux/ProdctSlice";
+import { useNavigate } from "react-router-dom";
 
-const dispatch=useDispatch()
+function Login() {
+  const navigate = useNavigate();
+
+const dispatch = useDispatch()
 
   const login = async (event) => {
     event.preventDefault()
@@ -32,8 +34,9 @@ const dispatch=useDispatch()
       const { status, message, data } = response.data;
       if (status === "success") {
         const token = data.token;
-        dispatch(isLoggedIn(token))
+        dispatch(setToken(token))
         console.log("Login successful. Token:", token);
+        navigate('/admhome')
       } else {
         console.error("Login failed. Message:", message);
       }

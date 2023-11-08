@@ -9,6 +9,7 @@ import ViewProduct from "./User/Pages/ViewProduct";
 import Accessories from "./User/Pages/Accessories";
 import Adminhome from "./Dealer/AdminComponent/Adminhome";
 import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
+import Login from "./SignIn/SignUp/Login";
 
 
 
@@ -20,8 +21,8 @@ const App = () => {
         <Router>
 
 <Routes>
-    {/* <Route path="/" element={<Home/>}/> */}
-    <Route path="/" element={<Adminhome/>}/>
+    <Route path="/" element={<Login/>}/>
+    <Route path="/admhome" element={<Adminhome/>}/>
     <Route path="/xfactor" element={<XfactorHome/>}/>
     <Route path="/elite" element={<EliteHome/>}/>
     <Route path="/desire" element={<DesireHome/>}/>
