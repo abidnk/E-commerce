@@ -15,8 +15,10 @@ import {
     const productsObject = useSelector(selectData);
     const prd = productsObject?.CardProduct;
    
-      const data =prd.filter((item) => item.type==="Elite")
-      console.log(data);
+   
+    const data =prd.filter((item) => item.type==="Elite")
+   
+    console.log(data);
       return (
   <>
         

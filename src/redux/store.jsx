@@ -10,31 +10,28 @@ export const store = configureStore({
 
 
 
-// import { createSlice } from "@reduxjs/toolkit";
-
-// const productSlice = createSlice({
-//   name: "product",
-//   initialState: {
-//     products: [], // Initialize your product data here
-//     token: null,  // Initialize token as null
-//   },
-//   reducers: {
-//     display: (state, action) => {
-//       return {
-//         ...state,
-//         products: action.payload,
-//       };
-//     },
-//     isLoggedIn: (state, action) => {
-//       return {
-//         ...state,
-//         token: action.payload, 
-        
-//       };
-//     },
-//   },
-// });
-
 // export const { display, isLoggedIn } = productSlice.actions;
 // export default productSlice.reducer;
 
+// import { createSlice } from "@reduxjs/toolkit";
+// // import { CardProduct } from "../User/DemyProducts";
+
+// const productSlice = createSlice({
+//     name:"product",
+//     initialState:[],
+//     reducers:{
+//         display:(state,action)=>{
+
+//             return action.payload;
+
+//         }
+//         ,
+//         isLoggedIn:(state,action) => {
+
+//             return true
+//         }
+//     }
+// })
+
+// export const {display}=productSlice.actions
+// export default productSlice.reducer

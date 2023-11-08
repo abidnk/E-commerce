@@ -7,6 +7,8 @@ import EliteHome from "./User/Pages/EliteHome";
 import DesireHome from "./User/Pages/DesireHome";
 import ViewProduct from "./User/Pages/ViewProduct";
 import Accessories from "./User/Pages/Accessories";
+import Adminhome from "./Dealer/AdminComponent/Adminhome";
+import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
 
 
 
@@ -18,12 +20,15 @@ const App = () => {
         <Router>
 
 <Routes>
-    <Route path="/" element={<Home/>}/>
+    {/* <Route path="/" element={<Home/>}/> */}
+    <Route path="/" element={<Adminhome/>}/>
     <Route path="/xfactor" element={<XfactorHome/>}/>
     <Route path="/elite" element={<EliteHome/>}/>
     <Route path="/desire" element={<DesireHome/>}/>
     <Route path="/add/:id" element={<ViewProduct/>}/>
     <Route path="/accessories" element={<Accessories/>}/>
+    <Route path="/admadd" element={<AdmAdd/>}/>
+
     
 
 </Routes>
