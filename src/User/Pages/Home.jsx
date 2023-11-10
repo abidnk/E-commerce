@@ -17,13 +17,13 @@ const  Home = () => {
 
     return(
         <>
-        {/* <NavBar/>
+        <NavBar/>
         <Carousel/>
         <Categories/>
         <MiddleImage/>
-        <Slider/>
+        {/* <Slider/> */}
         <FooterImage/>
-        <Footer/> */}
+        <Footer/>
         {/* <XfactorHome/> */}
         {/* <EliteHome/> */}
         {/* <DesireHome/> */}

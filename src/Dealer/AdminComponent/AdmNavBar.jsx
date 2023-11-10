@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   MDBContainer,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarToggler,
   MDBIcon,
   MDBNavbarNav,
@@ -38,7 +37,6 @@ export default function NavBar() {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-             
               <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/'>
                 Home
               </MDBNavbarLink>
@@ -58,7 +56,10 @@ export default function NavBar() {
               </MDBDropdown>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='/accessories' style={{color:'white'}}>Accessories</MDBNavbarLink>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/'>
+                Add Product
+              </MDBNavbarLink>
+              
             </MDBNavbarItem>
           </MDBNavbarNav>
 

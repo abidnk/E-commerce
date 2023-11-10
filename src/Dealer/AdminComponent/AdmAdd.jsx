@@ -44,7 +44,7 @@ const AdmAdd = () => {
   return (
     <>
       <div>
-          <form onSubmit={addProduct}>
+          <form className="mt-5" onSubmit={addProduct}>
         <MDBRow className="g-0 bg-light position-relative ">
             <MDBCol md="6" className="mb-md-0 p-md-4">
               <img
