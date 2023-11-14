@@ -10,6 +10,7 @@ import Accessories from "./User/Pages/Accessories";
 import Adminhome from "./Dealer/AdminComponent/Adminhome";
 import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
 import Login from "./SignIn/SignUp/Login";
+import Adminedit from "./Dealer/AdminComponent/AdmEdit";
 
 
 
@@ -26,9 +27,10 @@ const App = () => {
     <Route path="/xfactor" element={<XfactorHome/>}/>
     <Route path="/elite" element={<EliteHome/>}/>
     <Route path="/desire" element={<DesireHome/>}/>
-    <Route path="/add/:id" element={<ViewProduct/>}/>
+    <Route path="/add/:id" element={<ViewProduct />} />
     <Route path="/accessories" element={<Accessories/>}/>
     <Route path="/admadd" element={<AdmAdd/>}/>
+    <Route path="/admedit/:productId" element={<Adminedit />} />
 
     
 

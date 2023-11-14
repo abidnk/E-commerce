@@ -3,6 +3,7 @@ import { MDBRow, MDBCol, MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../redux/ProdctSlice";
 import axios from "axios";
+import AdmNavBar from "./AdmNavBar";
 
 const AdmAdd = () => {
   const token = useSelector(selectToken);
@@ -13,7 +14,7 @@ const AdmAdd = () => {
     const price = event.target.price.value;
     const description = event.target.discription.value;
     const category = event.target.category.value;
-
+  
     try {
       const response = await axios.post(
         "https://ecommerce-api.bridgeon.in/products",
@@ -40,9 +41,11 @@ const AdmAdd = () => {
       console.error("Error:", error.message);
     }
   };
+  
 
   return (
     <>
+     <AdmNavBar/>
       <div>
           <form className="mt-5" onSubmit={addProduct}>
         <MDBRow className="g-0 bg-light position-relative ">

@@ -37,7 +37,7 @@ export default function NavBar() {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/'>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admhome'>
                 Home
               </MDBNavbarLink>
               
@@ -56,7 +56,7 @@ export default function NavBar() {
               </MDBDropdown>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/'>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admadd'>
                 Add Product
               </MDBNavbarLink>
               
