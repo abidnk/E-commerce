@@ -9,6 +9,7 @@ export default function AdminEdit() {
   const token = useSelector(selectToken);
   const navigate = useNavigate();
   const { productId } = useParams();
+  const [showAlert, setShowAlert] = useState(false);
 
   // State to manage form data
   const [productData, setProductData] = useState({

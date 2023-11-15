@@ -2,20 +2,20 @@
 import React, { useEffect, useState } from "react";
 import {
   MDBCard,
+  MDBCardSubTitle,
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
   MDBCardImage,
   MDBBtn,
-  MDBRipple,
   MDBRow,
-  MDBCol,
-  MDBCardSubTitle,
+  MDBCol
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { selectProduct, selectToken,  setProducts  } from "../../redux/ProdctSlice";
 import axios from "axios";
+
 
 function AdmViewproduct() {
   const token = useSelector(selectToken);
@@ -78,39 +78,7 @@ function AdmViewproduct() {
   const handleDelete = (productId) => {
     deleteProduct(productId, token);
   };
-  const handleUpdateProduct = async (
-    productId,
-    updatedProductData,
-    token
-  ) => {
-    try {
-      const response = await axios.patch(
-        `https://ecommerce-api.bridgeon.in/products/${productId}`,
-        updatedProductData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const { status, message, data } = response.data;
-      if (status === "success") {
-        // Successfully updated the product.
-        console.log("Updated product details:", data);
-        // Call the API again to refresh the product list
-        getAllProducts(token);
-        setIsedit(false); // Hide the edit section after successful update
-        alert(`succussfully updated  ${updatedProductData.title}`);
-      } else {
-        console.error("Product update failed. Message:", message);
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-
-      setIsedit(false);
-    }
-  };
-
+ 
   return (
     <div>
       <h1 className="our">PRODUCTS DETAILS</h1>
@@ -119,49 +87,23 @@ function AdmViewproduct() {
       ) : (
         <MDBRow>
           {products.map((item) => (
-            <MDBCol
-              md="3"
-              key={item.id}
-              className="d-inline-flex shadow p-3 mb-5 "
-            >
+            <MDBCol md="4" key={item.id}>
               <MDBCard>
-                {/* <Link to={`/add/${item.id}`}> */}
-                <MDBRipple
-                  rippleColor="light"
-                  rippleTag="div"
-                  className="bg-image"
-                >
-                  <MDBCardImage src={item.image} fluid alt="..." />
-                  <a>
-                    <div
-                      className="mask"
-                      // style={{ backgroundColor: "black" }}
-                    ></div>
-                  </a>
-                </MDBRipple>
-                {/* </Link> */}
-
+                <MDBCardImage src={item.image} position='top' alt='...' />
                 <MDBCardBody>
                   <MDBCardTitle>{item.title}</MDBCardTitle>
-                  <MDBCardSubTitle>price:$ {item.price}</MDBCardSubTitle>
-                  <MDBCardText>{item.discription}</MDBCardText>
-                  <MDBRow>
+                 
+                  <MDBCardSubTitle>price:₹ {item.price}</MDBCardSubTitle>
                   <Link to={`/admedit/${item._id}`}>
-                    <MDBBtn
-                      style={{ backgroundColor: "black" }}
-                      
-                    >
-                      Edit Product
-                    </MDBBtn>
-                    </Link>
-                    <MDBBtn
-                      className="mt-2"
-                      style={{ backgroundColor: "black" }}
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Delete Product
-                    </MDBBtn>
-                  </MDBRow>
+                    <MDBBtn style={{ backgroundColor: "black", width: "100%" }}>Edit Product</MDBBtn>
+                  </Link>
+                  <MDBBtn
+                    className="mt-2"
+                    style={{ backgroundColor: "black", width: "100%" }}
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    Delete Product
+                  </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>

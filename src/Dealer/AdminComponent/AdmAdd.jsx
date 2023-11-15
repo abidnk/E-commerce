@@ -1,32 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { MDBRow, MDBCol, MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../redux/ProdctSlice";
 import axios from "axios";
 import AdmNavBar from "./AdmNavBar";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdmAdd = () => {
   const token = useSelector(selectToken);
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate() 
 
   const addProduct = async (event) => {
     event.preventDefault();
-    const title = event.target.name.value;
-    const price = event.target.price.value;
-    const description = event.target.discription.value;
-    const category = event.target.category.value;
+
+
+    const formData = new FormData();
+    formData.append("title", event.target.title.value); 
+    formData.append("price", event.target.price.value); 
+    formData.append("description", event.target.discription.value); 
+    formData.append("category", event.target.category.value); 
+    formData.append("img", event.target.image.files[0]);  
   
     try {
       const response = await axios.post(
-        "https://ecommerce-api.bridgeon.in/products",
-        {
-          title,
-          price,
-          description,
-          category,
-        },
+        "https://ecommerce-api.bridgeon.in/products",formData,
+       
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -34,6 +37,8 @@ const AdmAdd = () => {
       if (status === "success") {
         // Product added successfully.
         console.log("Product added. Product details:", data);
+        setShowAlert(true);
+        
       } else {
         console.error("Product addition failed. Message:", message);
       }
@@ -67,7 +72,7 @@ const AdmAdd = () => {
                   <MDBInput
                     type="text"
                     label="PRODUCT NAME"
-                    id="name"
+                    id="title"
                     name="name"
                   />
                 </div>
@@ -100,10 +105,10 @@ const AdmAdd = () => {
                 </div>
                 <div>
                   <label>Image</label>
-                  <MDBInput type="text" label="IMAGE" id="image" name="image" />
+                  <MDBInput type="file" label="IMAGE" id="image" name="image" />
                 </div>
                 <div>
-                  <MDBBtn size="sm" rounded color="link">
+                  <MDBBtn size="sm" type="submit" rounded color="link">
                     ADD PRODUCT
                   </MDBBtn>
                 </div>
@@ -112,6 +117,16 @@ const AdmAdd = () => {
         </MDBRow>
           </form>
       </div>
+      <Link to="/admhome">
+      {showAlert && (
+        <div className="alert alert-success" role="alert">
+          Product added successfully!
+          
+        </div>
+      )}
+      </Link>
+      
+
     </>
   );
 };
