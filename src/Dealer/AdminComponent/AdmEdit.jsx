@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectToken } from "../../redux/ProdctSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
+import AdmNavBar from "../AdminComponent/AdmNavBar"
 
 export default function AdminEdit() {
   const token = useSelector(selectToken);
@@ -89,9 +90,10 @@ export default function AdminEdit() {
   
   return (
     <>
+    <AdmNavBar/>
     <div className='container'>
 
-      <div className='suba row'  style={{backgroundColor:"black"}}>
+      <div className='suba row'>
         <div className="col-md-6">
           <h2>Edit The Product</h2>
           <MDBCard

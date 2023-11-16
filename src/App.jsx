@@ -11,6 +11,7 @@ import Adminhome from "./Dealer/AdminComponent/Adminhome";
 import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
 import Login from "./SignIn/SignUp/Login";
 import Adminedit from "./Dealer/AdminComponent/AdmEdit";
+import Register from "./SignIn/SignUp/Register";
 
 
 
@@ -22,7 +23,7 @@ const App = () => {
         <Router>
 
 <Routes>
-    <Route path="/" element={<Login/>}/>
+    <Route path="/" element={<Register/>}/>
     <Route path="/admhome" element={<Adminhome/>}/>
     <Route path="/xfactor" element={<XfactorHome/>}/>
     <Route path="/elite" element={<EliteHome/>}/>
