@@ -11,20 +11,28 @@ export default function AdminEdit() {
   const { productId } = useParams();
   const [showAlert, setShowAlert] = useState(false);
 
-  // State to manage form data
+  // State to manage form data (Edit cheyynda sadanm vekkan)
   const [productData, setProductData] = useState({
     title: "",
     price: 0,
     description: "",
     category: "",
+    image: "",
   });
 
-  // Handler for updating form data
+  // code for updating form data
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProductData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+   // Code for updating image data
+   const handleImageChange = (e) => {
+    setProductData((prevData) => ({
+      ...prevData,
+      image: e.target.files[0], 
     }));
   };
 
@@ -44,20 +52,28 @@ export default function AdminEdit() {
   }, [productId]);
 
   const updateProduct = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
 
-    const updatedProductData = {
-      title: productData.title,
-      price: productData.price,
-      description: productData.description,
-      category: productData.category,
-      // Add other fields as needed
-    };
+    const formData = new FormData();
+    formData.append("title", productData.title);
+    formData.append("price", productData.price);
+    formData.append("description", productData.description);
+    formData.append("category", productData.category);
+    formData.append("img", productData.image);
+
+    // const updatedProductData = {
+    //   title: productData.title,
+    //   price: productData.price,
+    //   description: productData.description,
+    //   category: productData.category,
+    //   // Add other fields as needed
+    // };
 
     try {
-      const response = await axios.patch(`https://ecommerce-api.bridgeon.in/products/${productId}`, updatedProductData, {
+      const response = await axios.patch(`https://ecommerce-api.bridgeon.in/products/${productId}`,formData, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       const { status, message, data } = response.data;
@@ -72,8 +88,10 @@ export default function AdminEdit() {
   };
   
   return (
+    <>
     <div className='container'>
-      <div className='suba row'>
+
+      <div className='suba row'  style={{backgroundColor:"black"}}>
         <div className="col-md-6">
           <h2>Edit The Product</h2>
           <MDBCard
@@ -84,10 +102,11 @@ export default function AdminEdit() {
               rippleColor="light"
               rippleTag="div"
             >
-              <MDBCardImage
-                src=""
+              <MDBCardImage 
+                src="/src/assets/img/Screenshot from 2023-11-16 12-35-58.png"
                 fluid
                 alt="..."
+                style={{ boxShadow: "none", transition: "none" }} 
               />
             </MDBRipple>
           </MDBCard>
@@ -144,6 +163,14 @@ export default function AdminEdit() {
                   onChange={handleInputChange}
                 />
                 <br />
+                <label>Product Image</label>
+                <MDBInput
+                  label='Product Image'
+                  type='file'
+                  name='image'
+                  onChange={handleImageChange}
+                />
+                <br />
 
                 <MDBBtn style={{ backgroundColor: "black" }} type="submit">CONFIRM EDIT</MDBBtn>
                 <MDBBtn className='ms-5' style={{ backgroundColor: "black" }} onClick={() => navigate('/admhome')}>Go Back</MDBBtn>
@@ -153,5 +180,6 @@ export default function AdminEdit() {
         </div>
       </div>
     </div>
+    </>
   );
 }
