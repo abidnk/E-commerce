@@ -4,6 +4,7 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
+    userToken:null,
     token: localStorage.getItem('token') || null,
   },
   reducers: {
@@ -17,11 +18,15 @@ const productSlice = createSlice({
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+    setUserToken: (state, action) => {
+      state.userToken = action.payload;
+    },
   },
 });
 
-export const { setToken, addProduct, setProducts } = productSlice.actions;
+export const { setToken, addProduct, setProducts , setUserToken} = productSlice.actions;
 export const selectToken = (state) => state.product.token;
 export const selectProduct = (state) => state.product.products;
+export const selectUserToken = (state) => state.product.userToken;
 
 export default productSlice.reducer;

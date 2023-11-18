@@ -11,7 +11,7 @@ import axios from "axios";
 import { setToken } from "../../redux/ProdctSlice";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function DealerLogin() {
   const navigate = useNavigate();
 
 const dispatch = useDispatch()
@@ -110,7 +110,7 @@ const dispatch = useDispatch()
   );
 }
 
-export default Login;
+export default DealerLogin;
 
 // import React from 'react';
 // import {

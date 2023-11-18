@@ -10,7 +10,7 @@ import Footer from "../Components/Footer";
 import Categories from "../Components/Categories";
 import FooterImage from "../Components/FooterImage";
 import Accessories from "./Accessories";
-import Login from "../../SignIn/SignUp/Login";
+import Login from "../../SignIn/SignUp/DealerLogin";
 
 
 const  Home = () => {

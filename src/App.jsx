@@ -9,9 +9,10 @@ import ViewProduct from "./User/Pages/ViewProduct";
 import Accessories from "./User/Pages/Accessories";
 import Adminhome from "./Dealer/AdminComponent/Adminhome";
 import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
-import Login from "./SignIn/SignUp/Login";
 import Adminedit from "./Dealer/AdminComponent/AdmEdit";
 import Register from "./SignIn/SignUp/Register";
+import UserLogin from "./SignIn/SignUp/UserLogin";
+import DealerLogin from "./SignIn/SignUp/DealerLogin";
 
 
 
@@ -32,6 +33,10 @@ const App = () => {
     <Route path="/accessories" element={<Accessories/>}/>
     <Route path="/admadd" element={<AdmAdd/>}/>
     <Route path="/admedit/:productId" element={<Adminedit />} />
+    <Route path="/userlogin" element={<UserLogin/>} />
+    <Route path="/admlogin" element={<DealerLogin/>} />
+
+    
 
     
 
