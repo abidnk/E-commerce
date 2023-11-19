@@ -8,7 +8,7 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setUserToken } from "../../redux/ProdctSlice";
 
@@ -104,6 +104,10 @@ function Register() {
             <MDBBtn className="mb-4 w-100 gradient-custom-4" type="submit" size="lg">
               Register
             </MDBBtn>
+            <p>
+                    Aleady registered?{" "}
+                    <Link to={"/userlogin"}>Click Here</Link>
+                  </p>
           </form>
         </MDBCardBody>
       </MDBCard>

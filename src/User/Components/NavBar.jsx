@@ -39,7 +39,7 @@ export default function NavBar() {
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
              
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/'>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/home'>
                 Home
               </MDBNavbarLink>
               

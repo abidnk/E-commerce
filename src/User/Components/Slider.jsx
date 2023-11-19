@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./Slider.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import axios from "axios";
 
 
 
@@ -24,10 +26,41 @@ const responsive = {
     slidesToSlide: 1, // optional, default to 1.
   },
 };
+
 const Slider = () => {
-  const selectData = (state) => state.products;
-  const productsObject = useSelector(selectData);
-  const prd = productsObject?.CardProduct;
+  const token = useSelector(selectToken);
+  const dispatch=useDispatch()
+  const products = useSelector(selectProduct);
+  const [isEdit, setIsedit] = useState(false);
+  const [updatedProductData, setUpdatedProductData] = useState(null);
+
+  const dealerToken = token;
+
+  const getAllProducts = async (token) => {
+    try {
+      const response = await axios.get(
+        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { status, message, data } = response.data;
+      if (status === "success") {
+        // Successfully fetched products.
+        dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+        console.log("Fetched products:", data);
+      } else {
+        console.error("Product retrieval failed. Message:", message);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  useEffect(() => {
+    getAllProducts(dealerToken);
+  }, [updatedProductData]);
  
   return (
     <div className="parent">
@@ -45,26 +78,27 @@ const Slider = () => {
         itemClass="carousel-item-padding"
         customTransition="transform 300ms ease-in"
       >
-        {prd?.map((product) => (
+        {products?.map((product) => (
           <div className="bigcard"  style={{}}>
-            <div key={product?.id} className="card" style={{ width: 450}}>
+            <div key={product?._id} className="card" style={{ width: 450}}>
               <img
                 className="product-img"
-                src={product?.src}
-                alt={`Product: ${product?.name}`}
+                src={product?.image}
+                alt={`Product: ${product?.title}`}
               />
-              <h2 style={{color:'black'}}>{product?.name}</h2>
-              <h6>{product?.discription}</h6>
-              <hr/>
+              <h2 style={{color:'black'}}>{product?.title}</h2>
+              {/* <h6>{product?.description}</h6> */}
+              <h5></h5>
+              
               <h5
                 className="oldprice"
                 style={{ textDecoration: "line-through" }}
               >
-                ₹{product?.old}
+                ₹64,999
               </h5>
               <h4 className="price" style={{color:'black'}}>₹{product?.price}</h4>
              
-              <Link to={`/add/${product.id}`}>
+              <Link to={`/add/${product._id}`}>
               <button
                 style={{
                   background: "black",

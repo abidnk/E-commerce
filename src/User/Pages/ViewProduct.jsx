@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import {
   MDBRow,
   MDBCol,
@@ -8,37 +8,65 @@ import {
   MDBInput,
   MDBCardImage,
 } from "mdb-react-ui-kit";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import NavBar from "../Components/NavBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
 
 const ViewProduct = () => {
-  const selectData = (state) => state.product;
-  const productsObject = useSelector(selectData);
-  const prd = productsObject?.CardProduct;
-  console.log(prd);
-  const { id } = useParams();
-  {
-    prd?.map((item) => {
-      console.log(item.src);
-    });
-  }
-  const navigate = useNavigate();
+  const token = useSelector(selectToken);
+  const dispatch=useDispatch()
+  const products = useSelector(selectProduct);
+  const [isEdit, setIsedit] = useState(false);
+  const [updatedProductData, setUpdatedProductData] = useState(null);
+  const {id} = useParams()
+  console.log(id);
+  const dealerToken = token;
 
-  const data = prd?.filter((item) => item.id === parseInt(id));
-  console.log(data, "kkkjkjkj");
+  const getAllProducts = async (token) => {
+    try {
+      const response = await axios.get(
+        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { status, message, data } = response.data;
+      if (status === "success") {
+        // Successfully fetched products.
+        dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+        console.log("Fetched products:", data);
+      } else {
+        console.error("Product retrieval failed. Message:", message);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  useEffect(() => {
+    getAllProducts(dealerToken);
+  }, [updatedProductData]);
+
+  const data =products.filter((item) => item._id=== id)
+
+
+
+
+  
 
   return (
     <>
       <NavBar />
-      <div className="view container ">
+      <div className="view container mt-5 mb-5">
         {data?.map((item) => (
-          <div key={item.id}>
+          <div key={item._id}>
             <div>
               <MDBRow className="g-0 bg-light position-relative">
                 <MDBCol md="6" className="mb-md-0 p-md-4 mt-5">
-                  <img src={item.src} className="img-fluid" alt="okdaa" />
+                  <img src={item.image} className="img-fluid" alt="okdaa" />
                 </MDBCol>
 
                 <MDBCol
@@ -47,14 +75,14 @@ const ViewProduct = () => {
                   id="view-right"
                 >
                   <div className="viewright-down bg-">
-                    <h1 className="mt-0">{item.name} </h1>
+                    <h1 className="mt-0">{item.title} </h1>
                     <h4
                       className="oldprice"
                       style={{ textDecoration: "line-through" }}
                     >
-                      ₹{item?.old}
+                      ₹69,000
                     </h4>
-                    <h2>Rs{item.price}</h2>
+                    <h2>Rs.{item.price}</h2>
 
                     <div className="contu">
                       <div>
@@ -72,29 +100,20 @@ const ViewProduct = () => {
                         >
                           Buynow
                         </MDBBtn>
-                        <MDBBtn onClick={() => setIsOpen(true)}>Open Login Modal</MDBBtn>
 
                       </div>
+                      <br/>
+
                       <div>
                         <span role="img" aria-label="star">
                           ⭐️⭐️⭐️⭐️⭐️ (156+ user Ratings)
                         </span>
+                        <hr/>
                         <p>
-                          Our e-bikes are designed for every type of rider in
-                          India, from the urban commuter to the adventure
-                          seeker. We offer a wide range of models that cater to
-                          different needs and preferences, ensuring that
-                          everyone can find the perfect e-bike for their
-                          lifestyle. We understand that buying an e-bike is an
-                          investment, which is why we go above and beyond to
-                          provide our customers with exceptional service and
-                          support. From pre-sale consultations to post-purchase
-                          maintenance and repairs, we are committed to ensuring
-                          that our customers have a seamless and hassle-free
-                          experience.
+                         {item.description}
                         </p>
                       </div>
-
+                        <hr/>
                       <MDBCol
                         lg="4"
                         md="6"
@@ -114,4 +133,4 @@ const ViewProduct = () => {
     </>
   );
 };
-export default ViewProduct;
+export default ViewProduct

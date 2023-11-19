@@ -1,5 +1,3 @@
-// import { CardProduct } from "./User/DemyProducts";
-import Home from "./User/Pages/Home";
 import { useState } from "react";
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import XfactorHome from "./User/Pages/XfactorHome";
@@ -13,6 +11,8 @@ import Adminedit from "./Dealer/AdminComponent/AdmEdit";
 import Register from "./SignIn/SignUp/Register";
 import UserLogin from "./SignIn/SignUp/UserLogin";
 import DealerLogin from "./SignIn/SignUp/DealerLogin";
+import Home from "./User/Pages/Home"
+import AdmUserList from "./Dealer/AdminComponent/AdmUserList";
 
 
 
@@ -25,6 +25,7 @@ const App = () => {
 
 <Routes>
     <Route path="/" element={<Register/>}/>
+    <Route path="/home" element={<Home/>}/>
     <Route path="/admhome" element={<Adminhome/>}/>
     <Route path="/xfactor" element={<XfactorHome/>}/>
     <Route path="/elite" element={<EliteHome/>}/>
@@ -35,6 +36,7 @@ const App = () => {
     <Route path="/admedit/:productId" element={<Adminedit />} />
     <Route path="/userlogin" element={<UserLogin/>} />
     <Route path="/admlogin" element={<DealerLogin/>} />
+    <Route path="/admuserlist" element={<AdmUserList/>} />
 
     
 

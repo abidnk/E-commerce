@@ -1,30 +1,64 @@
-
 import {
-    MDBRow,
-    MDBCol,
-    MDBIcon,
-    MDBBtn,
-    MDBInput,
-    MDBCardImage,
-  } from "mdb-react-ui-kit";
-  import { useSelector } from "react-redux";
-
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBBtn,
+  MDBInput,
+  MDBCardImage,
+} from "mdb-react-ui-kit";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import { useEffect, useState } from "react";
+import axios from "axios";
+  
   
   const Elite = () => {
-      const selectData = (state) => state.product;
-    const productsObject = useSelector(selectData);
-    const prd = productsObject?.CardProduct;
+    const token = useSelector(selectToken);
+    const dispatch=useDispatch()
+    const products = useSelector(selectProduct);
+    const [isEdit, setIsedit] = useState(false);
+    const [updatedProductData, setUpdatedProductData] = useState(null);
+  
+    const dealerToken = token;
+  
+    const getAllProducts = async (token) => {
+      try {
+        const response = await axios.get(
+          "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const { status, message, data } = response.data;
+        if (status === "success") {
+          // Successfully fetched products.
+          dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+          console.log("Fetched products:", data);
+        } else {
+          console.error("Product retrieval failed. Message:", message);
+        }
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    };
+    useEffect(() => {
+      getAllProducts(dealerToken);
+    }, [updatedProductData]);
+  
    
-   
-    const data =prd.filter((item) => item.type==="Elite")
-   
-    console.log(data);
+      const data =products.filter((item) => item.category==="elite")
+      console.log(data);
       return (
   <>
         
         <div className="view container mt-5" >
             <h1>Our Elite Ebike Range</h1>
-          {data.map((item) => (
+            {data.length === 0 ? (
+          <img src="https://previews.123rf.com/images/roxanabalint/roxanabalint1904/roxanabalint190400154/123529842-temporarily-out-of-stock-sign-or-stamp-on-white-background-vector-illustration.jpg"></img>
+        ) : (
+          data.map((item) => (
             <div key={item.id}>
               <div>
                 <MDBRow className="g-0 bg-light position-relative">
@@ -67,7 +101,8 @@ import {
                 </MDBRow>
               </div>
             </div>
-          ))}
+          ))
+        )}
         </div>
         <MDBCardImage
           className="ms-0 img-fluid"

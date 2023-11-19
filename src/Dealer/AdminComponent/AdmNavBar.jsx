@@ -59,7 +59,11 @@ export default function NavBar() {
               <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admadd'>
                 Add Product
               </MDBNavbarLink>
-              
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admuserlist'>
+                User List
+              </MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
 
