@@ -49,7 +49,7 @@ const ViewProduct = () => {
   useEffect(() => {
     getAllProducts(dealerToken);
   }, [updatedProductData]);
-
+  //Code for filtering the product using ID
   const data =products.filter((item) => item._id=== id)
 
 
