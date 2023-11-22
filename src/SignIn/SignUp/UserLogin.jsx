@@ -9,7 +9,7 @@ import {
 from 'mdb-react-ui-kit';
 import { useDispatch, useSelector } from 'react-redux'; 
 import axios from "axios";
-import { setToken } from "../../redux/ProdctSlice";
+import { selectUserToken, selectUserid, setToken, setUserToken, setUserid } from "../../redux/ProdctSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -23,6 +23,8 @@ function UserLogin() {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userId=useSelector(selectUserid)
+  const userToken=useSelector(selectUserToken)
 
   const tologin = (event) => {
     const email = event.target.email.value;
@@ -88,6 +90,10 @@ function UserLogin() {
       if (status === 'success') {
         console.log(data)
         const token = data.token;
+        const id = data.userId;
+        dispatch(setUserToken(token))
+        setName(data.username)
+        dispatch(setUserid(id))
         setName(data._id)
         
 

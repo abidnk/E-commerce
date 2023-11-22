@@ -13,7 +13,7 @@ import './Categories.css'
 import { Link } from 'react-router-dom';
 export default function Categories() {
   return (
-    <MDBRow className='row-cols-1 row-cols-md-3 g-1'>
+    <MDBRow className='row-cols-1 row-cols-md-3 g-1 mt-5 ms-5' >
         <Link to='/xfactor'>
       <MDBCol>
         

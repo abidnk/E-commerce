@@ -3,26 +3,30 @@ import axios from 'axios';
 import {
   MDBRow,
   MDBCol,
-  MDBIcon,
   MDBBtn,
-  MDBInput,
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import NavBar from "../Components/NavBar";
 import { useDispatch, useSelector } from "react-redux";
+import { selectUserToken, selectUserid } from "../../redux/ProdctSlice";
 import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
 
 const ViewProduct = () => {
   const token = useSelector(selectToken);
   const dispatch=useDispatch()
   const products = useSelector(selectProduct);
-  const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const {id} = useParams()
   console.log(id);
   const dealerToken = token;
+  const userId=useSelector(selectUserid)
+  const userToken=useSelector(selectUserToken)
+  console.log("userid",userId)
+  console.log("token",userToken);
+
+
 
   const getAllProducts = async (token) => {
     try {
@@ -35,7 +39,7 @@ const ViewProduct = () => {
         }
       );
       const { status, message, data } = response.data;
-      if (status === "success") {
+      if (status === "success") { 
         // Successfully fetched products.
         dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
         console.log("Fetched products:", data);
@@ -51,6 +55,37 @@ const ViewProduct = () => {
   }, [updatedProductData]);
   //Code for filtering the product using ID
   const data =products.filter((item) => item._id=== id)
+
+
+const handleCart = async (productId) => {
+  try {
+    console.log("Adding product to cart...");
+    console.log("Product ID:", productId);
+    console.log("User ID:", userId);
+    console.log("User Token:", userToken);
+
+    const response = await axios.post(
+      `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
+      null, // Assuming no data payload, pass null if not needed
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+
+// Log the response from the server
+
+    if (response.data.status === 'success') {
+      console.log('Product added to cart.');
+      toast.success("product added to cart  succussfully")
+    } else {
+      console.error('Product addition to cart failed. Message:', response.data.message);
+    }
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+};
 
 
 
@@ -89,7 +124,7 @@ const ViewProduct = () => {
                         <MDBBtn
                           className="me-1"
                           style={{ backgroundColor: "black" }}
-                          onClick={() => {}}
+                          onClick={() => handleCart(item._id)}
                         >
                           Add to cart
                         </MDBBtn>
@@ -127,7 +162,7 @@ const ViewProduct = () => {
           </div>
         ))}
       </div>
-      <MDBCardImage className="ms-0 img-fluid" src="" />
+      <MDBCardImage className="ms-0 img-fluid" src="/src/assets/img/Screenshot from 2023-11-22 15-41-12.png" />
 
       <Footer />
     </>

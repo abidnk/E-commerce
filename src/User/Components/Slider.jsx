@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import "./Slider.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
 import axios from "axios";
-
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCardTitle,
+  MDBIcon,
+} from "mdb-react-ui-kit";
 
 
 const responsive = {
@@ -80,40 +88,40 @@ const Slider = () => {
       >
         {products?.map((product) => (
           <div className="bigcard"  style={{}}>
-            <div key={product?._id} className="card" style={{ width: 450}}>
-              <img
-                className="product-img"
-                src={product?.image}
-                alt={`Product: ${product?.title}`}
-              />
-              <h2 style={{color:'black'}}>{product?.title}</h2>
-              {/* <h6>{product?.description}</h6> */}
-              <h5></h5>
-              
-              <h5
-                className="oldprice"
-                style={{ textDecoration: "line-through" }}
-              >
-                ₹64,999
-              </h5>
-              <h4 className="price" style={{color:'black'}}>₹{product?.price}</h4>
-             
-              <Link to={`/add/${product._id}`}>
-              <button
-                style={{
-                  background: "black",
-                  color: "white",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                  
-                  border: "1px solid black",
-                  padding: "15px 25px",
-                }}
-              >
-                BUY NOW
-              </button>
-              </Link>
-            </div>
+            <Link to={`/add/${product._id}`}>
+            <MDBContainer fluid className="my-5">
+      <MDBRow className="justify-content-center">
+        <MDBCol md="8">
+          <MDBCard className="text-black">
+            <MDBCardImage
+              src={product.image}
+              position="top"
+              alt="E-Motorad Bike"
+            />
+            <MDBCardBody>
+              <div className="text-center">
+                <MDBCardTitle>{product.title}</MDBCardTitle>
+                <p className="text-muted mb-4">An Electric Magic</p>
+              </div>
+              <div>
+                <div className="d-flex justify-content-between">
+                  <span>Type:</span>
+                  <h6>{product.category}</h6>
+                </div>
+              </div>
+              <div className="d-flex justify-content-between total font-weight-bold mt-4">
+                <span>Price:</span>
+                <span>₹{product.price}</span>
+              </div>
+                <div className="d-flex justify-content-between" style={{color:'green'}}>
+                  <span>*Free Delevery</span>
+                </div>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+    </Link>
           </div>
         ))}
       </Carousel>

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {
   MDBContainer,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarToggler,
   MDBIcon,
   MDBNavbarNav,
   MDBNavbarItem,
   MDBNavbarLink,
   MDBBtn,
+  MDBRow,
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
@@ -16,11 +16,48 @@ import {
   MDBCollapse,
 } from 'mdb-react-ui-kit';
 import "./NavBar.css"
-import { Link } from 'react-router-dom';
+import  { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import axios from "axios";
 export default function NavBar() {
   const [showBasic, setShowBasic] = useState(false);
+  const [searchTerm, setSerchTerm] = useState("");
+  const token = useSelector(selectToken);
+  const dispatch=useDispatch()
+  const products = useSelector(selectProduct);
+  const [updatedProductData, setUpdatedProductData] = useState(null);
+  const dealerToken = token;
+
+  const getAllProducts = async (token) => {
+    try {
+      const response = await axios.get(
+        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { status, message, data } = response.data;
+      if (status === "success") {
+        // Successfully fetched products.
+        dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+        console.log("Fetched products:", data);
+      } else {
+        console.error("Product retrieval failed. Message:", message);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  useEffect(() => {
+    getAllProducts(dealerToken);
+  }, [updatedProductData]);
 
   return (
+    <>
     <MDBNavbar expand='lg' sticky  bgColor='black' className='navbar' >
       <MDBContainer fluid>
       <img src="/src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
@@ -61,13 +98,46 @@ export default function NavBar() {
               <MDBNavbarLink href='/accessories' style={{color:'white'}}>Accessories</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
-
+          <Link to={"/addtocart"}> 
+          <MDBIcon fas className='me-4' icon="cart-plus" style={{ color: 'white' }}/>  
+          </Link>
           <form className='d-flex input-group w-auto'>
-            <input type='search' className='form-control' placeholder='BIKE' aria-label='Search' />
+            <input onChange={(e) => setSerchTerm(e.target.value)} id='searchInput' type='search' className='form-control' placeholder='BIKE' aria-label='Search' />
             <MDBBtn color='dark'>Search</MDBBtn>
           </form>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
+    {searchTerm ? (
+      <div className="main-divv">
+        <div className="container mx-5">
+          <MDBRow>
+            {products.filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.title
+                  .toLocaleLowerCase()
+                  .includes(searchTerm.toLocaleLowerCase())
+              ) {
+                return val;
+              }
+            }).map((val) => (
+              <div className="search-div" key={val.id}>
+                <p
+                  style={{ cursor: "pointer" }}
+                  
+                >
+                  {val.title}
+                </p>
+              </div>
+            ))}
+          </MDBRow>
+        </div>
+      </div>
+    ) : (
+      ""
+    )}
+    </>
   );
 }
