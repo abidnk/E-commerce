@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-  
+import Swal from "sweetalert2";
+
+const apiKey = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL
   
   const Desire = () => {
     const token = useSelector(selectToken);
@@ -25,7 +28,7 @@ import axios from "axios";
     const getAllProducts = async (token) => {
       try {
         const response = await axios.get(
-          "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+          `${baseUrl}/products?${apiKey}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -42,6 +45,15 @@ import axios from "axios";
         }
       } catch (error) {
         console.error("Error:", error.message);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error in the server side. Please Try again later',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: 'center',
+        });
       }
     };
     useEffect(() => {

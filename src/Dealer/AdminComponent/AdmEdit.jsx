@@ -5,6 +5,7 @@ import { selectToken } from "../../redux/ProdctSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import AdmNavBar from "../AdminComponent/AdmNavBar"
+import Swal from "sweetalert2";
 
 export default function AdminEdit() {
   const token = useSelector(selectToken);
@@ -69,9 +70,11 @@ export default function AdminEdit() {
     //   category: productData.category,
     //   // Add other fields as needed
     // };
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     try {
-      const response = await axios.patch(`https://ecommerce-api.bridgeon.in/products/${productId}`,formData, {
+      const response = await axios.patch(`${baseUrl}/products/${productId}`,formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -85,6 +88,15 @@ export default function AdminEdit() {
       }
     } catch (error) {
       console.error('Error:', error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in the server side. Please Try again later',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'center',
+      });
     }
   };
   

@@ -15,6 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectProduct, selectToken,  setProducts  } from "../../redux/ProdctSlice";
 import axios from "axios";
+import AdmSpinner from "./AdmSpinner";
+import Swal from 'sweetalert2';
+
+const apiKey = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 
 function AdmViewproduct() {
@@ -29,7 +34,7 @@ function AdmViewproduct() {
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        `${baseUrl}/products?${apiKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +60,7 @@ function AdmViewproduct() {
   const deleteProduct = async (productId, token) => {
     try {
       const response = await axios.delete(
-        `https://ecommerce-api.bridgeon.in/products/${productId}`,
+        `${baseUrl}/products/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -75,15 +80,30 @@ function AdmViewproduct() {
       console.error("Error:", error.message);
     }
   };
-  const handleDelete = (productId) => {
-    deleteProduct(productId, token);
-  };
+ 
+const handleDelete = (productId) => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You are about to delete this product!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!',
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      await deleteProduct(productId, token);
+      // Optionally, you can add additional actions after the deletion here.
+      Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
+    }
+  });
+};
  
   return (
     <div>
       <h1 className="our">PRODUCTS DETAILS</h1>
       {products.length === 0 ? (
-        <h3>There are no products.</h3>
+        <AdmSpinner/>
       ) : (
         <MDBRow>
           {products.map((item) => (

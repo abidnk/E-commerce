@@ -11,12 +11,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 import { selectUserToken, selectUserid, setToken, setUserToken, setUserid } from "../../redux/ProdctSlice";
 import { Link, useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2';
 
 function UserLogin() {
   
   
   const isSignIn = useSelector((state) => state.product.isSignIn);
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  console.log(apiKey,'api');
+  console.log(baseUrl,'url');
 
 
   const [state, setState] = useState("");
@@ -32,7 +36,7 @@ function UserLogin() {
     const isAdmin = email === "abidnk34@gmail.com";
     event.preventDefault();
    
-   const accessKey="588fb4a56ca2d201c19d"
+   const accessKey=`${apiKey}`
     if (isAdmin) {
       handleLogin(event);
     } else {
@@ -52,7 +56,7 @@ function UserLogin() {
   
     try {
       const response = await axios.post(
-        "https://ecommerce-api.bridgeon.in/login",
+        `${baseUrl}/login`,
         {
           email,
           password,
@@ -79,7 +83,7 @@ function UserLogin() {
   
 
     try {
-      const response = await axios.post('https://ecommerce-api.bridgeon.in/users/login', {
+      const response = await axios.post(`${baseUrl}/users/login`, {
         accessKey,
         email,
         password,
@@ -95,19 +99,43 @@ function UserLogin() {
         setName(data.username)
         dispatch(setUserid(id))
         setName(data._id)
-        
 
         console.log('Login successful. Token:', token);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Login Successfull',
+          color: 'black',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: 'center',
+        });
         navigate('/home')
-        alert('Login Successfull')
       } else {
-        alert('Login Fail')
+        Swal.fire({
+          title: 'Failed!',
+          text: 'Login Failed',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: 'center',
+        });
         console.error('Login failed. Message:', message);
-        alert('Login Fail')
+        
       }
     } catch (error) {
-      alert('Login Failed, Please check Your UserName and password')
-      console.error(`token${accessKey}`, error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in the server side. Please Try again later',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'center',
+      });
+      console.error(`token${apiKey}`, error.message);
     }
   };
 

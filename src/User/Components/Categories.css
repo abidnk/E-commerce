@@ -1,6 +1,6 @@
-.h-100{
+.category_card{
     transition: .5s;
 }
-.h-100:hover{
+.category_card:hover{
     transform: scale(1.1);
 }

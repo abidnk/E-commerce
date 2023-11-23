@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const Xfactor = () => {
@@ -19,13 +20,18 @@ const Xfactor = () => {
   const products = useSelector(selectProduct);
   const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
-
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL 
   const dealerToken = token;
+  const [clicked, setClicked] = useState(false);
+  const heartClick = () => {
+    setClicked(!clicked); 
+  };
 
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        `${baseUrl}/products?accessKey=${apiKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,17 +48,26 @@ const Xfactor = () => {
       }
     } catch (error) {
       console.error("Error:", error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in the server side. Please Try again later',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'center',
+      });
     }
   };
   useEffect(() => {
     getAllProducts(dealerToken);
   }, [updatedProductData]);
-
- 
-    const data =products.filter((item) => item.category==="xfactor")
-    console.log(data);
-    return (
-<>
+  
+  
+  const data =products.filter((item) => item.category==="xfactor")
+  console.log(data);
+  return (
+    <>
       
       <div className="view container mt-5" >
       <h1>Our X-Factor Ebike Range</h1>
@@ -60,6 +75,12 @@ const Xfactor = () => {
           <div key={item._id}>
             <div>
               <MDBRow className="g-0 bg-light position-relative">
+              <MDBIcon
+      far
+      icon="heart"
+      onClick={heartClick}
+      style={{ color: clicked ? 'red' : 'inherit', cursor: 'pointer' }}
+    />
                 <MDBCol md="6" className="mb-md-0 p-md-4">
                   <img src={item.image} className="img-fluid" alt="..." />
                 </MDBCol>
@@ -73,10 +94,10 @@ const Xfactor = () => {
                     <h1 className="mt-0">{item.title} </h1>
                     {/* <h4
                       className="oldprice"
-                       style={{ textDecoration: "line-through" }}
-                       >
-                       ₹{item.old}
-                       </h4> */}
+                      style={{ textDecoration: "line-through" }}
+                      >
+                      ₹{item.old}
+                    </h4> */}
                     <h2> ₹{item.price}</h2>
                     <p>{item.description}</p>
 

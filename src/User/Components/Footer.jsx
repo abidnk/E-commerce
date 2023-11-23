@@ -37,7 +37,7 @@ export default function Footer() {
           <MDBCol >
           <div className="ratio ratio-16x9">
       <iframe
-        src="https://www.youtube.com/embed/vlDzYIIOYmM"
+        src="https://www.youtube.com/embed/3Ug6Uzx7S90?si=C76QuTVMBWOXsU65"
         title="YouTube video"
         allowfullscreen
       ></iframe>

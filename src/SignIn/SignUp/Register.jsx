@@ -11,16 +11,20 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setUserToken } from "../../redux/ProdctSlice";
+import Swal from "sweetalert2";
+
 
 function Register() {
   const navigate = useNavigate();
-
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const dispatch = useDispatch();
+  
 
   const registerUser = async (accessKey, username, email, password) => {
     try {
       const response = await axios.post(
-        "https://ecommerce-api.bridgeon.in/users/register",
+        `${baseUrl}/users/register`,
         {
           accessKey,
           username,
@@ -38,6 +42,15 @@ function Register() {
       }
     } catch (error) {
       console.error("Error:", error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in the server side. Please Try again later',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'center',
+      });
     }
   };
 
@@ -47,7 +60,7 @@ function Register() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    registerUser("588fb4a56ca2d201c19d", username, email, password);
+    registerUser(`${apiKey}`, username, email, password);
   };
 
   return (

@@ -5,11 +5,14 @@ import { selectToken } from "../../redux/ProdctSlice";
 import axios from "axios";
 import AdmNavBar from "./AdmNavBar";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AdmAdd = () => {
   const token = useSelector(selectToken);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate() 
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const addProduct = async (event) => {
     event.preventDefault();
@@ -24,7 +27,7 @@ const AdmAdd = () => {
   
     try {
       const response = await axios.post(
-        "https://ecommerce-api.bridgeon.in/products",formData,
+        `${baseUrl}/products`,formData,
        
         {
           headers: {
@@ -44,6 +47,15 @@ const AdmAdd = () => {
       }
     } catch (error) {
       console.error("Error:", error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in the server side. Please Try again later',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'center',
+      });
     }
   };
   

@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
 import axios from "axios";
+import Swal from 'sweetalert2';
 export default function NavBar() {
   const [showBasic, setShowBasic] = useState(false);
   const [searchTerm, setSerchTerm] = useState("");
@@ -29,11 +30,13 @@ export default function NavBar() {
   const products = useSelector(selectProduct);
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const dealerToken = token;
+  const apiKey = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL
 
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        `${baseUrl}/products?${apiKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,6 +53,15 @@ export default function NavBar() {
       }
     } catch (error) {
       console.error("Error:", error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in the server side. Please Try again later',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'center',
+      });
     }
   };
   useEffect(() => {

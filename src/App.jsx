@@ -10,7 +10,6 @@ import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
 import Adminedit from "./Dealer/AdminComponent/AdmEdit";
 import Register from "./SignIn/SignUp/Register";
 import UserLogin from "./SignIn/SignUp/UserLogin";
-import DealerLogin from "./SignIn/SignUp/DealerLogin";
 import Home from "./User/Pages/Home"
 import AdmUserList from "./Dealer/AdminComponent/AdmUserList";
 import Cart from "./User/Components/Cart";
@@ -36,7 +35,6 @@ const App = () => {
     <Route path="/admadd" element={<AdmAdd/>}/>
     <Route path="/admedit/:productId" element={<Adminedit />} />
     <Route path="/userlogin" element={<UserLogin/>} />
-    <Route path="/admlogin" element={<DealerLogin/>} />
     <Route path="/admuserlist" element={<AdmUserList/>} />
     <Route path="/addtocart" element={<Cart/>}/>
 

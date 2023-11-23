@@ -9,7 +9,10 @@ import axios from 'axios';
 import { selectToken } from '../../redux/ProdctSlice';
 import { useSelector } from 'react-redux';
 import AdmNavBar from "./AdmNavBar"
+import Swal from "sweetalert2";
 
+const apiKey = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function AdmUserList() {
     const [users, setUsers] = useState([]);
@@ -18,7 +21,7 @@ export default function AdmUserList() {
   
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://ecommerce-api.bridgeon.in/users', {
+        const response = await axios.get(`${baseUrl}/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -42,7 +45,7 @@ export default function AdmUserList() {
   
     const deleteUser = async (userId, token) => {
       try {
-        const response = await axios.delete(`https://ecommerce-api.bridgeon.in/users/${userId}`, {
+        const response = await axios.delete(`${baseUrl}/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -57,6 +60,15 @@ export default function AdmUserList() {
         }
       } catch (error) {
         console.error('Error:', error.message);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error in the server side. Please Try again later',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: 'center',
+        });
       }
     };
   

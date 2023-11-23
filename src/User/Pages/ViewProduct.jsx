@@ -12,6 +12,7 @@ import NavBar from "../Components/NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserToken, selectUserid } from "../../redux/ProdctSlice";
 import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import Swal from 'sweetalert2'
 
 const ViewProduct = () => {
   const token = useSelector(selectToken);
@@ -19,19 +20,20 @@ const ViewProduct = () => {
   const products = useSelector(selectProduct);
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const {id} = useParams()
-  console.log(id);
+  
   const dealerToken = token;
   const userId=useSelector(selectUserid)
   const userToken=useSelector(selectUserToken)
-  console.log("userid",userId)
-  console.log("token",userToken);
+
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL 
 
 
 
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        "https://ecommerce-api.bridgeon.in/products?accessKey=588fb4a56ca2d201c19d",
+        `${baseUrl}/products?accessKey=${apiKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,12 +44,12 @@ const ViewProduct = () => {
       if (status === "success") { 
         // Successfully fetched products.
         dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
-        console.log("Fetched products:", data);
+        
       } else {
-        console.error("Product retrieval failed. Message:", message);
+        
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      
     }
   };
   useEffect(() => {
@@ -57,35 +59,52 @@ const ViewProduct = () => {
   const data =products.filter((item) => item._id=== id)
 
 
-const handleCart = async (productId) => {
-  try {
-    console.log("Adding product to cart...");
-    console.log("Product ID:", productId);
-    console.log("User ID:", userId);
-    console.log("User Token:", userToken);
-
-    const response = await axios.post(
-      `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
-      null, // Assuming no data payload, pass null if not needed
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
+  const handleCart = async (productId) => {
+    try {
+      console.log("Adding product to cart...");
+      console.log("Product ID:", productId);
+      console.log("User ID:", userId);
+      console.log("User Token:", userToken);
+  
+      const response = await axios.post(
+        `${baseUrl}/users/${userId}/cart/${productId}`,
+        null, 
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+  
+      if (response.data.status === 'success') {
+        console.log('Product added to cart.');
+       
+        Swal.fire({
+          title: 'Success!',
+          text: 'Product added to cart successfully',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: 'bottom',
+        });
+        
+      } else {
+        console.error('Product addition to cart failed. Message:', response.data.message);
       }
-    );
-
-// Log the response from the server
-
-    if (response.data.status === 'success') {
-      console.log('Product added to cart.');
-      toast.success("product added to cart  succussfully")
-    } else {
-      console.error('Product addition to cart failed. Message:', response.data.message);
+    } catch (error) {
+      console.error('Error:', error.message);
+      Swal.fire({
+        title: 'Failed!',
+        text: 'Product already added',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'bottom-center',
+      });
     }
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-};
+  };
 
 
 
@@ -95,7 +114,9 @@ const handleCart = async (productId) => {
   return (
     <>
       <NavBar />
+      
       <div className="view container mt-5 mb-5">
+    
         {data?.map((item) => (
           <div key={item._id}>
             <div>
