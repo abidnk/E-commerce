@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardImage, MDBBtn, MDBRipple, MDBInput } from "mdb-react-ui-kit";
 import { useSelector } from 'react-redux';
-import { selectToken } from "../../redux/ProdctSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import AdmNavBar from "../AdminComponent/AdmNavBar"
 import Swal from "sweetalert2";
+import { selectToken } from "../../redux/AuthSlice";
 
 export default function AdminEdit() {
   const token = useSelector(selectToken);

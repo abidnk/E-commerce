@@ -13,10 +13,11 @@ import {
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectProduct, selectToken,  setProducts  } from "../../redux/ProdctSlice";
+import {  selectToken  } from "../../redux/AuthSlice";
 import axios from "axios";
 import AdmSpinner from "./AdmSpinner";
 import Swal from 'sweetalert2';
+import { selectProduct, setProducts } from "../../redux/ProdctSlice";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -34,7 +35,7 @@ function AdmViewproduct() {
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        `${baseUrl}/products?${apiKey}`,
+        `${baseUrl}/products?accessKey=${apiKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

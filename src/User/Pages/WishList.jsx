@@ -10,11 +10,14 @@ import {
   MDBRipple,
   MDBBtn,
 } from "mdb-react-ui-kit";
-import "./ecommerce-category-product.css";
+import "./WishList.css";
+import NavBar from "../Components/NavBar";
 
 
 function WishList() {
   return (
+    <>
+    <NavBar/>
     <MDBContainer fluid>
       <MDBRow className="justify-content-center mb-0">
         <MDBCol md="12" xl="10">
@@ -105,6 +108,7 @@ function WishList() {
         </MDBCol>
       </MDBRow>
      </MDBContainer>
+     </>
   );
 }
 

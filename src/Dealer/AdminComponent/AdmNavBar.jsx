@@ -17,7 +17,7 @@ import {
 import "./AdmNavBar.css"
 import { Link } from 'react-router-dom';
 
-export default function NavBar() {
+export default function AdmNavBar() {
   const [showBasic, setShowBasic] = useState(false);
 
   return (

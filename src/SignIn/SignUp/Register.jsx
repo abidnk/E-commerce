@@ -10,7 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { setUserToken } from "../../redux/ProdctSlice";
+import { setUserToken } from "../../redux/AuthSlice";
 import Swal from "sweetalert2";
 
 
@@ -35,7 +35,16 @@ function Register() {
       const { status, message, data } = response.data;
       if (status === "success") {
         dispatch(setUserToken(data.token));
-        navigate("/userlogin");
+        Swal.fire({
+          title: 'Success',
+          text: 'Registration Successfull',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: 'bottom',
+        });
+        navigate("/login");
         console.log("Registration successful. Token:", data.token);
       } else {
         console.error("Registration failed. Message:", message);
@@ -119,7 +128,7 @@ function Register() {
             </MDBBtn>
             <p>
                     Aleady registered?{" "}
-                    <Link to={"/userlogin"}>Click Here</Link>
+                    <Link to={"/login"}>Click Here</Link>
                   </p>
           </form>
         </MDBCardBody>

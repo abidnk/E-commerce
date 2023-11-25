@@ -10,8 +10,8 @@ import { useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import NavBar from "../Components/NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserToken, selectUserid } from "../../redux/ProdctSlice";
-import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import { selectUserToken, selectUserid, selectToken } from "../../redux/AuthSlice";
+import { selectProduct, setProducts } from "../../redux/ProdctSlice";
 import Swal from 'sweetalert2'
 
 const ViewProduct = () => {
@@ -56,6 +56,7 @@ const ViewProduct = () => {
     getAllProducts(dealerToken);
   }, [updatedProductData]);
   //Code for filtering the product using ID
+
   const data =products.filter((item) => item._id=== id)
 
 
@@ -105,12 +106,6 @@ const ViewProduct = () => {
       });
     }
   };
-
-
-
-
-  
-
   return (
     <>
       <NavBar />

@@ -6,7 +6,7 @@ import { MDBBadge,
         MDBTableBody 
     } from 'mdb-react-ui-kit';
 import axios from 'axios';
-import { selectToken } from '../../redux/ProdctSlice';
+import { selectToken } from '../../redux/AuthSlice';
 import { useSelector } from 'react-redux';
 import AdmNavBar from "./AdmNavBar"
 import Swal from "sweetalert2";

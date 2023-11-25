@@ -59,15 +59,17 @@
 
 import React from 'react';
 import './MiddleImage.css'
+import { Link } from 'react-router-dom';
 const MiddleImage = ()=>  {
   return (
     <div className='image' style={{ position: 'relative', maxWidth: '100%', minWidth: '320px' }}>
+      <Link to={'/xfactor'}>
       <img
         src='src/assets/img/Screenshot from 2023-10-29 16-32-17.png'
         alt='Pani Pali'
         style={{ width: '100%', height: 'auto' }}
       />
-
+      </Link>
       {/* <img
         src='src/assets/img/Screenshot from 2023-10-30 10-06-35.png'
         alt='Overlapping Image'

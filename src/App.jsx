@@ -9,16 +9,20 @@ import Adminhome from "./Dealer/AdminComponent/Adminhome";
 import AdmAdd from "./Dealer/AdminComponent/AdmAdd"
 import Adminedit from "./Dealer/AdminComponent/AdmEdit";
 import Register from "./SignIn/SignUp/Register";
-import UserLogin from "./SignIn/SignUp/UserLogin";
 import Home from "./User/Pages/Home"
 import AdmUserList from "./Dealer/AdminComponent/AdmUserList";
 import Cart from "./User/Components/Cart";
+import WishList from "./User/Pages/WishList";
+import Login from "./SignIn/SignUp/Login";
+import { selectAdminStatus } from "./redux/AuthSlice";
+import { useSelector } from "react-redux";
 
 
 
 const App = () => {
     // const [products, setProducts] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isAdmin = useSelector(selectAdminStatus);
     return(
         
         <Router>
@@ -26,18 +30,23 @@ const App = () => {
 <Routes>
     <Route path="/" element={<Register/>}/>
     <Route path="/home" element={<Home/>}/>
-    <Route path="/admhome" element={<Adminhome/>}/>
     <Route path="/xfactor" element={<XfactorHome/>}/>
     <Route path="/elite" element={<EliteHome/>}/>
     <Route path="/desire" element={<DesireHome/>}/>
     <Route path="/add/:id" element={<ViewProduct />} />
     <Route path="/accessories" element={<Accessories/>}/>
-    <Route path="/admadd" element={<AdmAdd/>}/>
-    <Route path="/admedit/:productId" element={<Adminedit />} />
-    <Route path="/userlogin" element={<UserLogin/>} />
-    <Route path="/admuserlist" element={<AdmUserList/>} />
+    <Route path="/login" element={<Login/>} />
     <Route path="/addtocart" element={<Cart/>}/>
+    <Route path="/wishlist" element={<WishList/>}/>
 
+    {isAdmin && (
+          <>
+            <Route path="/admhome" element={<Adminhome />} />
+            <Route path="/admadd" element={<AdmAdd />} />
+            <Route path="/admedit/:productId" element={<Adminedit />} />
+            <Route path="/admuserlist" element={<AdmUserList />} />
+          </>
+        )}
     
 
     

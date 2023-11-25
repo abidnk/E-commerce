@@ -1,144 +1,203 @@
 import React, { useState } from "react";
 import { MDBRow, MDBCol, MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../redux/ProdctSlice";
 import axios from "axios";
 import AdmNavBar from "./AdmNavBar";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { selectToken } from "../../redux/AuthSlice";
+import { Formik, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  title: Yup.string().required("Product Name is required"),
+  price: Yup.number().required("Price is required"),
+  description: Yup.string().required("Description is required"),
+  category: Yup.string().required("Category is required"),
+  image: Yup.mixed().required("Image is required"),
+});
 
 const AdmAdd = () => {
   const token = useSelector(selectToken);
   const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate() 
+  const navigate = useNavigate();
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
-  const addProduct = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (values, { setErrors }) => {
+    if (Object.keys(errors).length === 0) {
+      // Proceed with form submission if no errors
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("price", values.price);
+      formData.append("description", values.description);
+      formData.append("category", values.category);
+      formData.append("img", values.image);
 
-
-    const formData = new FormData();
-    formData.append("title", event.target.title.value); 
-    formData.append("price", event.target.price.value); 
-    formData.append("description", event.target.discription.value); 
-    formData.append("category", event.target.category.value); 
-    formData.append("img", event.target.image.files[0]);  
-  
-    try {
-      const response = await axios.post(
-        `${baseUrl}/products`,formData,
-       
-        {
+      try {
+        const response = await axios.post(`${baseUrl}/products`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
           },
+        });
+        const { status, message, data } = response.data;
+        if (status === "success") {
+          console.log("Product added. Product details:", data);
+          // Show success message
+          Swal.fire({
+            title: "Success!",
+            text: "Product added successfully!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 3000,
+            toast: true,
+            position: "center",
+          });
+          navigate("/admhome");
+        } else {
+          console.error("Product addition failed. Message:", message);
         }
-      );
-      const { status, message, data } = response.data;
-      if (status === "success") {
-        // Product added successfully.
-        console.log("Product added. Product details:", data);
-        setShowAlert(true);
-        
-      } else {
-        console.error("Product addition failed. Message:", message);
+      } catch (error) {
+        console.error("Error:", error.message);
+        Swal.fire({
+          title: "Error!",
+          text: "Error in the server side. Please Try again later",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+          position: "center",
+        });
       }
-    } catch (error) {
-      console.error("Error:", error.message);
-      Swal.fire({
-        title: 'Error!',
-        text: 'Error in the server side. Please Try again later',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 3000,
-        toast: true,
-        position: 'center',
-      });
+    } else {
+      setErrors(errors);
+      console.error("Validation errors:", errors); // Handle validation errors
     }
   };
-  
 
   return (
     <>
-     <AdmNavBar/>
-      <div>
-          <form className="mt-5" onSubmit={addProduct}>
-        <MDBRow className="g-0 bg-light position-relative ">
-            <MDBCol md="6" className="mb-md-0 p-md-4">
-              <img
-                src="/src/assets/img/X-factor/X1.png"
-                className="w-50"
-                alt="..."
+    <AdmNavBar/>
+    <div className="ms-5 w-50">
+      <Formik
+        initialValues={{
+          title: "",
+          price: "",
+          description: "",
+          category: "",
+          image: null,
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, handleChange, errors }) => (
+          <Form className="mt-5" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="title">PRODUCT NAME</label>
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                required
               />
-            </MDBCol>
-            <MDBCol
-              md="5"
-              className="p-6 ps-md-6 d-flex align-items-center justify-content-center"
-              id="view-right"
-            >
-              <div className="viewright-down">
-                <div>
-                  <label>PRODUCT NAME</label>
-                  <MDBInput
-                    type="text"
-                    label="PRODUCT NAME"
-                    id="title"
-                    name="name"
-                  />
-                </div>
-                <div>
-                  <label>AMOUNT</label>
-                  <MDBInput
-                    type="number"
-                    label="AMOUNT"
-                    id="price"
-                    name="price"
-                  />
-                </div>
-                <div>
-                  <label>DISCRIPTION</label>
-                  <MDBInput
-                    type="text"
-                    label="DISCRIPTION"
-                    id="discription"
-                    name="discription"
-                  />
-                </div>
-                <div>
-                  <label>CATEGORY</label>
-                  <MDBInput
-                    type="text"
-                    label="category"
-                    id="category"
-                    name="category"
-                  />
-                </div>
-                <div>
-                  <label>Image</label>
-                  <MDBInput type="file" label="IMAGE" id="image" name="image" />
-                </div>
-                <div>
-                  <MDBBtn size="sm" type="submit" rounded color="link">
-                    ADD PRODUCT
-                  </MDBBtn>
-                </div>
-              </div>
-            </MDBCol>
-        </MDBRow>
-          </form>
-      </div>
-      <Link to="/admhome">
-      {showAlert && (
-        <div className="alert alert-success" role="alert">
-          Product added successfully!
-          
-        </div>
-      )}
-      </Link>
-      
+              <ErrorMessage
+                name="title"
+                component="div"
+                className="text-danger"
+              />
+            </div>
 
+            <div className="form-group">
+              <label htmlFor="price">AMOUNT</label>
+              <input
+                type="number"
+                className="form-control"
+                id="price"
+                name="price"
+                value={values.price}
+                onChange={handleChange}
+                required
+              />
+              <ErrorMessage
+                name="price"
+                component="div"
+                className="text-danger"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="description">DISCRIPTION</label>
+              <textarea
+                className="form-control"
+                id="description"
+                name="description"
+                value={values.description}
+                onChange={handleChange}
+                required
+              />
+              <ErrorMessage
+                name="description"
+                component="div"
+                className="text-danger"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="category">CATEGORY</label>
+              <input
+                type="text"
+                className="form-control"
+                id="category"
+                name="category"
+                value={values.category}
+                onChange={handleChange}
+                required
+              />
+              <ErrorMessage
+                name="category"
+                component="div"
+                className="text-danger"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="image">Image</label>
+              <input
+                type="file"
+                className="form-control"
+                id="image"
+                name="image"
+                onChange={handleChange}
+                required
+              />
+              <ErrorMessage
+                name="image"
+                component="div"
+                className="text-danger"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary mt-3"
+              disabled={Object.keys(errors).length > 0}
+            >
+              ADD PRODUCT
+            </button>
+
+            {showAlert && (
+              <div className="alert alert-success mt-3">
+                Product added successfully!
+              </div>
+            )}
+          </Form>
+        )}
+      </Formik>
+    </div>
     </>
   );
 };

@@ -8,10 +8,11 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import { selectProduct,  setProducts } from "../../redux/ProdctSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { selectToken } from "../../redux/AuthSlice";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrl = import.meta.env.VITE_BASE_URL
@@ -28,7 +29,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
     const getAllProducts = async (token) => {
       try {
         const response = await axios.get(
-          `${baseUrl}/products?${apiKey}`,
+          `${baseUrl}/products?accessKey=${apiKey}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

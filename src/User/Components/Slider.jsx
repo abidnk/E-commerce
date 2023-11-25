@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   selectProduct,
-  selectToken,
   setProducts,
 } from "../../redux/ProdctSlice";
 import axios from "axios";
@@ -20,6 +19,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import Swal from "sweetalert2";
+import { selectToken } from "../../redux/AuthSlice";
 
 const responsive = {
   desktop: {

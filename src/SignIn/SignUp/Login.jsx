@@ -9,18 +9,17 @@ import {
 from 'mdb-react-ui-kit';
 import { useDispatch, useSelector } from 'react-redux'; 
 import axios from "axios";
-import { selectUserToken, selectUserid, setToken, setUserToken, setUserid } from "../../redux/ProdctSlice";
+import { selectUserToken, selectUserid, setAdmin, setToken, setUserToken, setUserid } from "../../redux/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-function UserLogin() {
+function Login() {
   
   
   const isSignIn = useSelector((state) => state.product.isSignIn);
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  console.log(apiKey,'api');
-  console.log(baseUrl,'url');
+  
 
 
   const [state, setState] = useState("");
@@ -68,6 +67,7 @@ function UserLogin() {
         const token = data.token;
         console.log("Login successful. Token:", token);
         dispatch(setToken(token)); 
+        dispatch(setAdmin(true));
         navigate("/admhome");
       } else {
         console.error("Login failed. Message:", message);
@@ -206,4 +206,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default Login;

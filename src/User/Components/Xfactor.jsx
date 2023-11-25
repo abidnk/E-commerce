@@ -1,4 +1,3 @@
-
 import {
   MDBRow,
   MDBCol,
@@ -8,24 +7,27 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import {
+  selectProduct,
+  setProducts,
+} from "../../redux/ProdctSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { selectToken } from "../../redux/AuthSlice";
 
 const Xfactor = () => {
   const token = useSelector(selectToken);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const products = useSelector(selectProduct);
   const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const apiKey = import.meta.env.VITE_API_KEY;
-  const baseUrl = import.meta.env.VITE_BASE_URL 
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const dealerToken = token;
   const [clicked, setClicked] = useState(false);
   const heartClick = () => {
-    setClicked(!clicked); 
+    setClicked(!clicked);
   };
 
   const getAllProducts = async (token) => {
@@ -49,38 +51,39 @@ const Xfactor = () => {
     } catch (error) {
       console.error("Error:", error.message);
       Swal.fire({
-        title: 'Error!',
-        text: 'Error in the server side. Please Try again later',
-        icon: 'error',
+        title: "Error!",
+        text: "Error in the server side. Please Try again later",
+        icon: "error",
         showConfirmButton: false,
         timer: 3000,
         toast: true,
-        position: 'center',
+        position: "center",
       });
     }
   };
   useEffect(() => {
     getAllProducts(dealerToken);
   }, [updatedProductData]);
-  
-  
-  const data =products.filter((item) => item.category==="xfactor")
+
+  const data = products.filter((item) => item.category === "xfactor");
   console.log(data);
   return (
     <>
-      
-      <div className="view container mt-5" >
-      <h1>Our X-Factor Ebike Range</h1>
+      <div className="view container mt-5">
+        <h1>Our X-Factor Ebike Range</h1>
         {data?.map((item) => (
           <div key={item._id}>
             <div>
               <MDBRow className="g-0 bg-light position-relative">
-              <MDBIcon
-      far
-      icon="heart"
-      onClick={heartClick}
-      style={{ color: clicked ? 'red' : 'inherit', cursor: 'pointer' }}
-    />
+                <MDBIcon
+                  fas
+                  icon="heart"
+                  onClick={heartClick}
+                  style={{
+                    color: clicked ? "red" : "inherit",
+                    cursor: "pointer",
+                  }}
+                />
                 <MDBCol md="6" className="mb-md-0 p-md-4">
                   <img src={item.image} className="img-fluid" alt="..." />
                 </MDBCol>
@@ -106,7 +109,6 @@ const Xfactor = () => {
                         <span role="img" aria-label="star">
                           ⭐️⭐️⭐️⭐️⭐️ (276+ user Ratings)
                         </span>
-                        
                       </div>
 
                       <MDBCol
@@ -122,13 +124,8 @@ const Xfactor = () => {
           </div>
         ))}
       </div>
-      <MDBCardImage
-        className="ms-0 img-fluid"
-        src=""
-      />
-
-     
+      <MDBCardImage className="ms-0 img-fluid" src="" />
     </>
-      );
-    };
-    export default Xfactor;
+  );
+};
+export default Xfactor;

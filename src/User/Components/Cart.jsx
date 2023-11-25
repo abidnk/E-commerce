@@ -1,56 +1,29 @@
-import React from "react";
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCol,
-  MDBContainer,
-  MDBIcon,
-  MDBInput,
-  MDBRow,
-  MDBTypography,
-} from "mdb-react-ui-kit";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect } from "react";
-import { selectUserToken, selectUserid } from "../../redux/ProdctSlice";
 import { useSelector } from "react-redux";
+import { selectUserToken, selectUserid } from "../../redux/AuthSlice";
 import NavBar from "./NavBar";
 import Swal from "sweetalert2";
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 
-const  Cart =  () => {
-  
+const Cart = () => {
   const userToken = useSelector(selectUserToken);
-  const [cartitem, setCaritem] = useState([]);
+  const userId = useSelector(selectUserid);
+  const [cartItems, setCartItems] = useState([]);
 
   const apiKey = import.meta.env.VITE_API_KEY;
-const baseUrl = import.meta.env.VITE_BASE_URL;
-
-  const userId = useSelector(selectUserid);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const viewCart = async (userId, token) => {
     try {
-      const response = await axios.get(
-        `${baseUrl}.in/users/${userId}/cart`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${baseUrl}/users/${userId}/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const { status, message, data } = response.data;
       if (status === "success") {
-        // Successfully fetched cart items.
-      //  let length=0;
-        const products = data.products;
-        setCaritem(products);
-        console.log(products);
-      //   products.forEach((item) => {
-      //      length = item.cart.length;
-  
-      //  });
-      //   setCartlength(length);
+        setCartItems(data.products || []);
       } else {
         console.error("Cart item retrieval failed. Message:", message);
       }
@@ -58,11 +31,11 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
       console.error("Error:", error.message);
     }
   };
+
   useEffect(() => {
     viewCart(userId, userToken);
   }, [userId, userToken]);
 
-  
   const deleteItem = async (id) => {
     try {
       const response = await axios.delete(
@@ -73,22 +46,13 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
           },
         }
       );
-  
-      if (response.data.status === 'success') {
-        // Remove the item from the local state
-        setCaritem((items) => {
-          const updatedItems = items.map((item) => {
-            return {
-              ...item,
-              cart: item.cart.filter((cartItem) => cartItem._id !== id),
-            };
-          });
-          return updatedItems.filter((item) => item.cart.length > 0);
-        });
+
+      if (response.data.status === "success") {
+        setCartItems((items) =>
+          items.filter((item) => item._id !== id)
+        );
         console.log('Item deleted successfully.');
-        // setCartitem((items) => items.filter((item) => item.id !== id));
-        // console.log('Item deleted successfully.');
-      
+        window.location.reload() 
       } else {
         console.error('Failed to delete item. Message:', response.data.message);
       }
@@ -105,12 +69,13 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
       });
     }
   };
+
   
   return (
     <div>
       <NavBar/>
       
-      {cartitem.length === 0 ? (
+      {cartItems.length === 0 ? (
         <>
       <h1>Your Cart is Empty</h1>
       </>
@@ -134,7 +99,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
               </div>
 
               <MDBCard className="rounded-3 mb-4">
-                {cartitem.map((value) => {
+                {cartItems.map((value) => {
                   
                   return value.cart.map((item) => {
                     return(

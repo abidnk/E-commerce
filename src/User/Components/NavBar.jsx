@@ -19,9 +19,10 @@ import "./NavBar.css"
 import  { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectProduct, selectToken, setProducts } from "../../redux/ProdctSlice";
+import { selectProduct, setProducts} from "../../redux/ProdctSlice";
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { selectToken } from '../../redux/AuthSlice';
 export default function NavBar() {
   const [showBasic, setShowBasic] = useState(false);
   const [searchTerm, setSerchTerm] = useState("");
@@ -36,7 +37,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        `${baseUrl}/products?${apiKey}`,
+        `${baseUrl}/products?accessKey=${apiKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,6 +111,13 @@ const baseUrl = import.meta.env.VITE_BASE_URL
               <MDBNavbarLink href='/accessories' style={{color:'white'}}>Accessories</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
+          <Link to={"/wishlist"}>
+          <MDBIcon className='me-3'
+                  far
+                  icon="heart"
+                  style={{ color: 'white' }}
+                />
+                </Link>
           <Link to={"/addtocart"}> 
           <MDBIcon fas className='me-4' icon="cart-plus" style={{ color: 'white' }}/>  
           </Link>
