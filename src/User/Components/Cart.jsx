@@ -5,6 +5,7 @@ import { selectUserToken, selectUserid } from "../../redux/AuthSlice";
 import NavBar from "./NavBar";
 import Swal from "sweetalert2";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTypography } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const userToken = useSelector(selectUserToken);
@@ -145,6 +146,7 @@ const Cart = () => {
               </MDBCard>
               <MDBCard>
                 <MDBCardBody>
+                  <Link to={'/payment'}>
                   <MDBBtn
                     className="ms-3"
                     block
@@ -153,6 +155,7 @@ const Cart = () => {
                   >
                     Apply
                   </MDBBtn>
+                  </Link>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>

@@ -46,8 +46,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
       );
       const { status, message, data } = response.data;
       if (status === "success") {
-        // Successfully fetched products.
-        dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+        dispatch(setProducts(data)); 
         console.log("Fetched products:", data);
       } else {
         console.error("Product retrieval failed. Message:", message);
@@ -125,6 +124,9 @@ const baseUrl = import.meta.env.VITE_BASE_URL
             <input onChange={(e) => setSerchTerm(e.target.value)} id='searchInput' type='search' className='form-control' placeholder='BIKE' aria-label='Search' />
             <MDBBtn color='dark'>Search</MDBBtn>
           </form>
+          <Link to={'/login'}>
+            <MDBIcon fas className='ms-3' style={{ color: 'white' }} icon="sign-out-alt" />
+            </Link>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

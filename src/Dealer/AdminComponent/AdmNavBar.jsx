@@ -57,14 +57,18 @@ export default function AdmNavBar() {
               </MDBDropdown>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admadd'>
+              <Link to={'admadd'}>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page'>
                 Add Product
               </MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admuserlist'>
+              <Link to={'/admuserlist'}>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' >
                 User List
               </MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
           </MDBNavbarNav>
 
