@@ -10,19 +10,19 @@ export default function Carousel() {
       <MDBCarouselItem
         className='w-100 d-block'
         itemId={1}
-        src='src/assets/img/Screenshot from 2023-11-18 14-52-13.png'
+        src='/assets/img/Screenshot from 2023-11-18 14-52-13.png'
         alt='Pani Pali'
       />
       <MDBCarouselItem
         className='w-100 d-block'
         itemId={2}
-        src='src/assets/img/Screenshot from 2023-10-29 08-16-28.png'
+        src='/assets/img/Screenshot from 2023-10-29 08-16-28.png'
         alt='Pani Pali'
       />
       <MDBCarouselItem
         className='w-100 d-block'
         itemId={3}
-        src='src/assets/img/Screenshot from 2023-10-29 08-18-36.png'
+        src='/assets/img/Screenshot from 2023-10-29 08-18-36.png'
         alt='...'
       />
       <MDBCarouselItem
