@@ -19,7 +19,7 @@ export default function Categories() {
         
         <MDBCard className='h-100 category_card'style={{ width: '300px' }}>
           <MDBCardImage
-            src='src/assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
+            src='/assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
             alt='...'
             position='top'
           />
