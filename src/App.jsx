@@ -35,17 +35,12 @@ const App = () => {
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<Payment />} />
 
-        {/* Moved AdmUserList route outside of isAdmin conditional block */}
+        
         <Route path="/admuserlist" element={<AdmUserList />} />
-
-        {isAdmin && (
-          <>
-          <Route path="/admhome" element={<Adminhome />}/>
-          <Route path="/admadd" element={<AdmAdd />} />
-          <Route path="/admedit/:productId" element={<Adminedit />} />
-          <Route path="/admuserlist" element={<AdmUserList />} />
-        </>
-        )}
+        <Route path="/admhome" element={<Adminhome />}/>
+        <Route path="/admadd" element={<AdmAdd />} />
+        <Route path="/admedit/:productId" element={<Adminedit />} />
+        <Route path="/admuserlist" element={<AdmUserList />} />
       </Routes>
     </Router>
   );

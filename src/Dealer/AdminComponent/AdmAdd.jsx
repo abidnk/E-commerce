@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { MDBRow, MDBCol, MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import AdmNavBar from "./AdmNavBar";
-import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { selectToken } from "../../redux/AuthSlice";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import AdmNavBar from "./AdmNavBar";
+import { selectToken } from "../../redux/AuthSlice";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Product Name is required"),
@@ -18,6 +17,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const AdmAdd = () => {
+  console.log('hola')
   const token = useSelector(selectToken);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
@@ -25,91 +25,94 @@ const AdmAdd = () => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleSubmit = async (values, { setErrors }) => {
-    if (Object.keys(errors).length === 0) {
-      // Proceed with form submission if no errors
-      const formData = new FormData();
-      formData.append("title", values.title);
-      formData.append("price", values.price);
-      formData.append("description", values.description);
-      formData.append("category", values.category);
-      formData.append("img", values.image);
+   
+    // values.preventDefault()
+    // try {
+    //   // Proceed with form submission
+    //   const formData = new FormData();
+    //   formData.append("title", values.title);
+    //   formData.append("price", values.price);
+    //   formData.append("description", values.description);
+    //   formData.append("category", values.category);
+    //   formData.append("img", values.image);
 
-      try {
-        const response = await axios.post(`${baseUrl}/products`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        const { status, message, data } = response.data;
-        if (status === "success") {
-          console.log("Product added. Product details:", data);
-          // Show success message
-          Swal.fire({
-            title: "Success!",
-            text: "Product added successfully!",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 3000,
-            toast: true,
-            position: "center",
-          });
-          navigate("/admhome");
-        } else {
-          console.error("Product addition failed. Message:", message);
-        }
-      } catch (error) {
-        console.error("Error:", error.message);
-        Swal.fire({
-          title: "Error!",
-          text: "Error in the server side. Please Try again later",
-          icon: "error",
-          showConfirmButton: false,
-          timer: 3000,
-          toast: true,
-          position: "center",
-        });
-      }
-    } else {
-      setErrors(errors);
-      console.error("Validation errors:", errors); // Handle validation errors
-    }
+    //   console.log("data");
+    //   const response = await axios.post(`${baseUrl}/products`)
+    //    formData, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   };
+
+    //   const { status, message, data } = response.data;
+    //   if (status === "success") {
+    //     console.log("Product added. Product details:", data);
+    //     // Show success message
+    //     Swal.fire({
+    //       title: "Success!",
+    //       text: "Product added successfully!",
+    //       icon: "success",
+    //       showConfirmButton: false,
+    //       timer: 3000,
+    //       toast: true,
+    //       position: "center",
+    //     });
+    //     navigate("/admhome");
+    //   } else {
+    //     console.error("Product addition failed. Message:", message);
+    //   }
+    // } catch (error) {
+    //   if (error.response && error.response.data) {
+    //     setErrors(error.response.data.errors); // Update errors using setErrors
+    //   }
+    //   console.error("Error:", error.message);
+    //   Swal.fire({
+    //     title: "Error!",
+    //     text: "Error in the server side. Please Try again later",
+    //     icon: "error",
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     toast: true,
+    //     position: "center",
+    //   });
+    // }
   };
 
   return (
     <>
-    <AdmNavBar/>
-    <div className="ms-5 w-50">
-      <Formik
-        initialValues={{
-          title: "",
-          price: "",
-          description: "",
-          category: "",
-          image: null,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, handleChange, errors }) => (
-          <Form className="mt-5" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="title">PRODUCT NAME</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                name="title"
-                value={values.title}
-                onChange={handleChange}
-                required
-              />
-              <ErrorMessage
-                name="title"
-                component="div"
-                className="text-danger"
-              />
-            </div>
+      <AdmNavBar />
+      <div className="ms-5 w-50">
+        <Formik
+          initialValues={{
+            title: "",
+            price: "",
+            description: "",
+            category: "",
+            image: null,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ values, handleChange, errors }) => (
+            <Form className="mt-5" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="title">PRODUCT NAME</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={values.title}
+                  onChange={handleChange}
+                  required
+                />
+                <ErrorMessage
+                  name="title"
+                  component="div"
+                  className="text-danger"
+                />
+              </div>
 
             <div className="form-group">
               <label htmlFor="price">AMOUNT</label>
@@ -191,13 +194,13 @@ const AdmAdd = () => {
 
             {showAlert && (
               <div className="alert alert-success mt-3">
-                Product added successfully!
-              </div>
-            )}
-          </Form>
-        )}
-      </Formik>
-    </div>
+              Product added successfully!
+                </div>
+              )}
+            </Form>
+          )}
+        </Formik>
+      </div>
     </>
   );
 };
