@@ -85,7 +85,7 @@ console.log(products,'hiiiii');
   console.log(products);
   return (
     <div className="parent">
-      <h1>Our Ebike Range</h1>
+      <h1>Our Range</h1>
       <Carousel
         responsive={responsive}
         autoPlay={true}
