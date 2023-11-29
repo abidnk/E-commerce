@@ -10,6 +10,8 @@ import {
   MDBCol
 } from 'mdb-react-ui-kit';
 import './Categories.css'
+import Category from '../../assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
+alt='...'
 import { Link } from 'react-router-dom';
 export default function Categories() {
   return (
@@ -19,7 +21,7 @@ export default function Categories() {
         
         <MDBCard className='h-100 category_card'style={{ width: '300px' }}>
           <MDBCardImage
-            src='/assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
+            src={Category}
             alt='...'
             position='top'
           />
