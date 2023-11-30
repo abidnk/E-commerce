@@ -16,6 +16,7 @@ import Login from "./SignIn/SignUp/Login";
 import { selectAdminStatus } from "./redux/AuthSlice";
 import { useSelector } from "react-redux";
 import Payment from "./User/Components/Payment";
+import Error from "./User/Components/Error";
 
 const App = () => {
   const isAdmin = useSelector(selectAdminStatus);
@@ -34,7 +35,8 @@ console.log(isAdmin);
         <Route path="/addtocart" element={<Cart />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<Payment />} />
-
+        <Route path="/*" element={<Error/>} />
+        
         {isAdmin?( 
         <>
         <Route path="/admuserlist" element={<AdmUserList />} />
