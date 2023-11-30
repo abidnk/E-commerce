@@ -11,7 +11,8 @@ import {
 } from 'mdb-react-ui-kit';
 import './Categories.css'
 import Category from '../../assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
-
+import desire from 'src/assets/img/Categories/Screenshot from 2023-11-02 09-45-27.png'
+import Elite from 'src/assets/img/Categories/Screenshot from 2023-11-02 11-46-12.png'
 import { Link } from 'react-router-dom';
 export default function Categories() {
   return (
@@ -32,7 +33,7 @@ export default function Categories() {
       <MDBCol>
         <MDBCard className='h-100 category_card'style={{ width: '300px' }}>
           <MDBCardImage
-            src='src/assets/img/Categories/Screenshot from 2023-11-02 09-45-27.png'
+            src={desire}
             alt='...'
             position='top'
           />
@@ -43,7 +44,7 @@ export default function Categories() {
       <MDBCol>
         <MDBCard className='h-100 category_card 'style={{ width: '300px' }}>
           <MDBCardImage
-            src='src/assets/img/Categories/Screenshot from 2023-11-02 11-46-12.png'
+            src={Elite}
             alt='...'
             position='top'
           />
