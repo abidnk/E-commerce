@@ -72,7 +72,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
     <>
     <MDBNavbar expand='lg' sticky  bgColor='black' className='navbar' >
       <MDBContainer fluid>
-      <img src="/src/assets/img/Screenshot from 2023-11-01 12-53-09.png" alt="Logo" />
+      <img src={'/src/assets/img/Screenshot from 2023-11-01 12-53-09.png'} alt="Logo" />
 
         <MDBNavbarToggler
         

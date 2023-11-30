@@ -19,7 +19,7 @@ import Payment from "./User/Components/Payment";
 
 const App = () => {
   const isAdmin = useSelector(selectAdminStatus);
-
+console.log(isAdmin);
   return (
     <Router>
       <Routes>
@@ -35,12 +35,16 @@ const App = () => {
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<Payment />} />
 
-        
+        {isAdmin?( 
+        <>
         <Route path="/admuserlist" element={<AdmUserList />} />
         <Route path="/admhome" element={<Adminhome />}/>
         <Route path="/admadd" element={<AdmAdd />} />
         <Route path="/admedit/:productId" element={<Adminedit />} />
         <Route path="/admuserlist" element={<AdmUserList />} />
+        </>
+        ):("")}
+       
       </Routes>
     </Router>
   );

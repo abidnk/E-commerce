@@ -38,9 +38,11 @@ export default function AdmNavBar() {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/admhome'>
-                Home
-              </MDBNavbarLink>
+              <Link to="/admhome">
+                <MDBNavbarLink style={{color:'white'}} active aria-current='page'>
+                  Home
+                </MDBNavbarLink>
+              </Link>
               
             </MDBNavbarItem>
 
