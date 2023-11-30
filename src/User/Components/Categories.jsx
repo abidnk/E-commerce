@@ -11,8 +11,8 @@ import {
 } from 'mdb-react-ui-kit';
 import './Categories.css'
 import Category from '../../assets/img/Categories/Screenshot from 2023-11-02 09-45-14.png'
-import desire from 'src/assets/img/Categories/Screenshot from 2023-11-02 09-45-27.png'
-import Elite from 'src/assets/img/Categories/Screenshot from 2023-11-02 11-46-12.png'
+import desire from '../../assets/img/Categories/Screenshot from 2023-11-02 09-45-27.png'
+import Elite from '../../assets/img/Categories/Screenshot from 2023-11-02 11-46-12.png'
 import { Link } from 'react-router-dom';
 export default function Categories() {
   return (
