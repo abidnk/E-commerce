@@ -88,11 +88,11 @@ const baseUrl = import.meta.env.VITE_BASE_URL
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-             
-              <MDBNavbarLink style={{color:'white'}} active aria-current='page' href='/home'>
+             <Link to={'/home'}>
+              <MDBNavbarLink style={{color:'white'}} active aria-current='page' >
                 Home
               </MDBNavbarLink>
-              
+              </Link>
             </MDBNavbarItem>
 
             <MDBNavbarItem>
@@ -108,7 +108,9 @@ const baseUrl = import.meta.env.VITE_BASE_URL
               </MDBDropdown>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='/accessories' style={{color:'white'}}>Accessories</MDBNavbarLink>
+              <Link to={'/accessories'}>
+              <MDBNavbarLink  style={{color:'white'}}>Accessories</MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
           </MDBNavbarNav>
           <Link to={"/wishlist"}>
