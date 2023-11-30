@@ -23,7 +23,7 @@ console.log(isAdmin);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Register />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/home" element={<Home />} />
         <Route path="/xfactor" element={<XfactorHome />} />
         <Route path="/elite" element={<EliteHome />} />
