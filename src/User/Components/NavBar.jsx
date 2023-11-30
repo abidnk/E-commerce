@@ -23,6 +23,7 @@ import { selectProduct, setProducts} from "../../redux/ProdctSlice";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { selectToken } from '../../redux/AuthSlice';
+import logo from '../../assets/img/Screenshot from 2023-11-01 12-53-09.png'
 export default function NavBar() {
   const [showBasic, setShowBasic] = useState(false);
   const [searchTerm, setSerchTerm] = useState("");
@@ -72,7 +73,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
     <>
     <MDBNavbar expand='lg' sticky  bgColor='black' className='navbar' >
       <MDBContainer fluid>
-      <img src={'/src/assets/img/Screenshot from 2023-11-01 12-53-09.png'} alt="Logo" />
+      <img src={logo} alt="Logo" />
 
         <MDBNavbarToggler
         
