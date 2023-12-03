@@ -1,9 +1,9 @@
 body {
-    background-color: #eee;
+  background-color: #eee;
+}
+
+@media (max-width: 767.98px) {
+  .border-sm-start-none {
+    border-left: none !important;
   }
-  
-  @media (max-width: 767.98px) {
-    .border-sm-start-none {
-      border-left: none !important;
-    }
-  }
+}

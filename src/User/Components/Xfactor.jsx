@@ -7,14 +7,15 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectProduct,
-  setProducts,
-} from "../../redux/ProdctSlice";
+import { selectProduct, setProducts } from "../../redux/ProdctSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { selectToken, selectUserToken, selectUserid } from "../../redux/AuthSlice";
+import {
+  selectToken,
+  selectUserToken,
+  selectUserid,
+} from "../../redux/AuthSlice";
 
 const Xfactor = () => {
   const token = useSelector(selectToken);
@@ -27,9 +28,8 @@ const Xfactor = () => {
   const dealerToken = token;
   const [clicked, setClicked] = useState(false);
   const userId = useSelector(selectUserid);
-  const userToken=useSelector(selectUserToken)
+  const userToken = useSelector(selectUserToken);
 
-  
   const heartClick = () => {
     setClicked(!clicked);
   };
@@ -71,50 +71,52 @@ const Xfactor = () => {
 
   const data = products.filter((item) => item.category === "xfactor");
   console.log(data);
- 
+
   const handleWishList = async (productId) => {
     try {
       console.log("Adding product to cart...");
       console.log("Product ID:", productId);
       console.log("User ID:", userId);
       console.log("User Token:", userToken);
-  
+
       const response = await axios.post(
         `${baseUrl}/users/${userId}/wishlist/${productId}`,
-        null, 
+        null,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
         }
       );
-  
-      if (response.data.status === 'success') {
-        console.log('Product added to wishlist.');
-       
+
+      if (response.data.status === "success") {
+        console.log("Product added to wishlist.");
+
         Swal.fire({
-          title: 'Success!',
-          text: 'Product added to Wishlist successfully',
-          icon: 'success',
+          title: "Success!",
+          text: "Product added to Wishlist successfully",
+          icon: "success",
           showConfirmButton: false,
           timer: 3000,
           toast: true,
-          position: 'bottom',
+          position: "bottom",
         });
-        
       } else {
-        console.error('Product addition to Wishlist failed. Message:', response.data.message);
+        console.error(
+          "Product addition to Wishlist failed. Message:",
+          response.data.message
+        );
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
       Swal.fire({
-        title: 'Failed!',
-        text: 'Product already added',
-        icon: 'error',
+        title: "Failed!",
+        text: "Product already added",
+        icon: "error",
         showConfirmButton: false,
         timer: 3000,
         toast: true,
-        position: 'bottom-center',
+        position: "bottom-center",
       });
     }
   };
@@ -126,7 +128,6 @@ const Xfactor = () => {
           <div key={item._id}>
             <div>
               <MDBRow className="g-0 bg-light position-relative">
-                
                 <MDBCol md="6" className="mb-md-0 p-md-4">
                   <img src={item.image} className="img-fluid" alt="..." />
                 </MDBCol>
@@ -165,11 +166,14 @@ const Xfactor = () => {
               </MDBRow>
             </div>
             <MDBBtn
-            outline
-            color="primary"
-            size="sm"
-            className="mt-2"
-            onClick={() => handleWishList(item._id)}>Add to wishlist</MDBBtn>
+              outline
+              color="primary"
+              size="sm"
+              className="mt-2"
+              onClick={() => handleWishList(item._id)}
+            >
+              Add to wishlist
+            </MDBBtn>
           </div>
         ))}
       </div>

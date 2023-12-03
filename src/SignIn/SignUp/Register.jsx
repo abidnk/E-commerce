@@ -13,36 +13,31 @@ import axios from "axios";
 import { setUserToken } from "../../redux/AuthSlice";
 import Swal from "sweetalert2";
 
-
 function Register() {
   const navigate = useNavigate();
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const dispatch = useDispatch();
-  
 
   const registerUser = async (accessKey, username, email, password) => {
     try {
-      const response = await axios.post(
-        `${baseUrl}/users/register`,
-        {
-          accessKey,
-          username,
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/users/register`, {
+        accessKey,
+        username,
+        email,
+        password,
+      });
       const { status, message, data } = response.data;
       if (status === "success") {
         dispatch(setUserToken(data.token));
         Swal.fire({
-          title: 'Success',
-          text: 'Registration Successfull',
-          icon: 'success',
+          title: "Success",
+          text: "Registration Successfull",
+          icon: "success",
           showConfirmButton: false,
           timer: 3000,
           toast: true,
-          position: 'bottom',
+          position: "bottom",
         });
         navigate("/login");
         console.log("Registration successful. Token:", data.token);
@@ -52,13 +47,13 @@ function Register() {
     } catch (error) {
       console.error("Error:", error.message);
       Swal.fire({
-        title: 'Error!',
-        text: 'Error in the server side. Please Try again later',
-        icon: 'error',
+        title: "Error!",
+        text: "Error in the server side. Please Try again later",
+        icon: "error",
         showConfirmButton: false,
         timer: 3000,
         toast: true,
-        position: 'center',
+        position: "center",
       });
     }
   };
@@ -84,7 +79,7 @@ function Register() {
       <div className="mask gradient-custom-3"></div>
       <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
         <MDBCardBody className="px-5">
-          <form onSubmit={handleRegistration}> 
+          <form onSubmit={handleRegistration}>
             <h2 className="text-uppercase text-center mb-5">
               Create an account
             </h2>
@@ -123,13 +118,16 @@ function Register() {
                 label="I agree all statements in Terms of service"
               />
             </div>
-            <MDBBtn className="mb-4 w-100 gradient-custom-4" type="submit" size="lg">
+            <MDBBtn
+              className="mb-4 w-100 gradient-custom-4"
+              type="submit"
+              size="lg"
+            >
               Register
             </MDBBtn>
             <p>
-                    Aleady registered?{" "}
-                    <Link to={"/login"}>Click Here</Link>
-                  </p>
+              Aleady registered? <Link to={"/login"}>Click Here</Link>
+            </p>
           </form>
         </MDBCardBody>
       </MDBCard>

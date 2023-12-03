@@ -1,72 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   MDBContainer,
   MDBInput,
   MDBBtn,
   MDBRow,
   MDBCol,
-}
-from 'mdb-react-ui-kit';
-import { useDispatch, useSelector } from 'react-redux'; 
+} from "mdb-react-ui-kit";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { selectUserToken, selectUserid, setAdmin, setToken, setUserToken, setUserid } from "../../redux/AuthSlice";
+import {
+  selectUserToken,
+  selectUserid,
+  setAdmin,
+  setToken,
+  setUserToken,
+  setUserid,
+} from "../../redux/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function Login() {
-  
-  
   const isSignIn = useSelector((state) => state.product.isSignIn);
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  
-
 
   const [state, setState] = useState("");
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId=useSelector(selectUserid)
-  const userToken=useSelector(selectUserToken)
+  const userId = useSelector(selectUserid);
+  const userToken = useSelector(selectUserToken);
 
   const tologin = (event) => {
     const email = event.target.email.value;
-    const password=event.target.password.value;
+    const password = event.target.password.value;
     const isAdmin = email === "abidnk34@gmail.com";
     event.preventDefault();
-   
-   const accessKey=`${apiKey}`
+
+    const accessKey = `${apiKey}`;
     if (isAdmin) {
       handleLogin(event);
     } else {
-      loginUser(accessKey,email,password);
+      loginUser(accessKey, email, password);
     }
   };
-  
-  
+
   const handleLogin = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     console.log(email);
     const password = event.target.password.value;
     console.log(password);
-  
+
     setState([...state, { email: email, password: password }]);
-  
+
     try {
-      const response = await axios.post(
-        `${baseUrl}/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/login`, {
+        email,
+        password,
+      });
       const { status, message, data } = response.data;
       console.log(response.data);
       if (status === "success") {
         const token = data.token;
         console.log("Login successful. Token:", token);
-        dispatch(setToken(token)); 
+        dispatch(setToken(token));
         dispatch(setAdmin(true));
         navigate("/admhome");
       } else {
@@ -75,65 +73,59 @@ function Login() {
     } catch (error) {
       console.error("Error:", error.message);
     }
-  }
-    
+  };
 
-  
-  const loginUser = async (accessKey,email,password) => {
-  
-
+  const loginUser = async (accessKey, email, password) => {
     try {
       const response = await axios.post(`${baseUrl}/users/login`, {
         accessKey,
         email,
         password,
-      }
-        );
-        const { status, message, data } = response.data;
+      });
+      const { status, message, data } = response.data;
 
-      if (status === 'success') {
-        console.log(data)
+      if (status === "success") {
+        console.log(data);
         const token = data.token;
         const id = data.userId;
-        dispatch(setUserToken(token))
-        setName(data.username)
-        dispatch(setUserid(id))
-        setName(data._id)
+        dispatch(setUserToken(token));
+        setName(data.username);
+        dispatch(setUserid(id));
+        setName(data._id);
 
-        console.log('Login successful. Token:', token);
+        console.log("Login successful. Token:", token);
         Swal.fire({
-          title: 'Success!',
-          text: 'Login Successfull',
-          color: 'black',
-          icon: 'success',
+          title: "Success!",
+          text: "Login Successfull",
+          color: "black",
+          icon: "success",
           showConfirmButton: false,
           timer: 3000,
           toast: true,
-          position: 'center',
+          position: "center",
         });
-        navigate('/home')
+        navigate("/home");
       } else {
         Swal.fire({
-          title: 'Failed!',
-          text: 'Login Failed',
-          icon: 'error',
+          title: "Failed!",
+          text: "Login Failed",
+          icon: "error",
           showConfirmButton: false,
           timer: 3000,
           toast: true,
-          position: 'center',
+          position: "center",
         });
-        console.error('Login failed. Message:', message);
-        
+        console.error("Login failed. Message:", message);
       }
     } catch (error) {
       Swal.fire({
-        title: 'Error!',
-        text: 'Error in the server side. Please Try again later',
-        icon: 'error',
+        title: "Error!",
+        text: "Error in the server side. Please Try again later",
+        icon: "error",
         showConfirmButton: false,
         timer: 3000,
         toast: true,
-        position: 'center',
+        position: "center",
       });
       console.error(`token${apiKey}`, error.message);
     }
@@ -179,10 +171,10 @@ function Login() {
 
               <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
                 <p className="mb-0">Don't have an account?</p>
-                <Link to={'/'}>
-                <MDBBtn outline className="mx-2" color="danger">
-                  Register
-                </MDBBtn>
+                <Link to={"/"}>
+                  <MDBBtn outline className="mx-2" color="danger">
+                    Register
+                  </MDBBtn>
                 </Link>
               </div>
             </div>

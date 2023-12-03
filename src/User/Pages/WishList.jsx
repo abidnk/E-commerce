@@ -15,7 +15,7 @@ import NavBar from "../Components/NavBar";
 import { selectUserToken, selectUserid } from "../../redux/AuthSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 function WishList() {
@@ -50,14 +50,14 @@ function WishList() {
   const deleteItem = async (id) => {
     try {
       const confirmResult = await Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to remove this item from the wishlist?',
-        icon: 'warning',
+        title: "Are you sure?",
+        text: "Do you want to remove this item from the wishlist?",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, remove it!',
-        cancelButtonText: 'Cancel'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, remove it!",
+        cancelButtonText: "Cancel",
       });
 
       if (confirmResult.isConfirmed) {
@@ -70,34 +70,31 @@ function WishList() {
           }
         );
 
-        if (response.data.status === 'success') {
-          setWishListItems((items) =>
-            items.filter((item) => item._id !== id)
-          );
-          Swal.fire('Deleted!', 'The item has been removed.', 'success');
-          console.log('Item deleted successfully.');
+        if (response.data.status === "success") {
+          setWishListItems((items) => items.filter((item) => item._id !== id));
+          Swal.fire("Deleted!", "The item has been removed.", "success");
+          console.log("Item deleted successfully.");
           window.location.reload();
         } else {
           console.error(
-            'Failed to delete item. Message:',
+            "Failed to delete item. Message:",
             response.data.message
           );
         }
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
       Swal.fire({
-        title: 'Error!',
-        text: 'Error in the server side. Please Try again later',
-        icon: 'error',
+        title: "Error!",
+        text: "Error in the server side. Please Try again later",
+        icon: "error",
         showConfirmButton: false,
         timer: 3000,
         toast: true,
-        position: 'center',
+        position: "center",
       });
     }
   };
-
 
   return (
     <>
@@ -153,13 +150,12 @@ function WishList() {
                         </div>
                         <h6 className="text-success">Free shipping</h6>
                         <div className="d-flex flex-column mt-4">
-                          <Link to={'/payment'}>
-                          <MDBBtn color="primary" size="sm" className="w-50">
-                            Buy Now
-                          </MDBBtn>
+                          <Link to={"/payment"}>
+                            <MDBBtn color="primary" size="sm" className="w-50">
+                              Buy Now
+                            </MDBBtn>
                           </Link>
                           <MDBBtn
-                            
                             onClick={() => deleteItem(item._id)}
                             outline
                             color="primary"

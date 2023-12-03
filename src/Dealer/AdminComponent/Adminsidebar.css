@@ -1,231 +1,231 @@
 @import "./_variables";
 
 body {
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    font-family: fontFamily;
-    background-color: veryLightGreen;
-    text-transform: capitalize;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-family: fontFamily;
+  background-color: veryLightGreen;
+  text-transform: capitalize;
 }
 
 h1 {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar {
-    background-color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 2rem 3rem;
-    width: 15rem;
-    height: 100vh;
-    transition: 0.5s all;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem 3rem;
+  width: 15rem;
+  height: 100vh;
+  transition: 0.5s all;
 }
 
 .sidebar .logoContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .sidebar .logoContainer h2.title {
-    font-size: 31.42px;
-    color: green;
-    padding: 0 0 0 1rem;
+  font-size: 31.42px;
+  color: green;
+  padding: 0 0 0 1rem;
 }
 
 .sidebar .burgerContainer::before {
-    content: "";
-    background-color: green;
-    position: absolute;
-    right: (-35px / 2);
-    top: calc(9rem / 1.15);
-    width: 35px;
-    height: 35px;
-    border-radius: 2rem;
-    z-index: 1;
+  content: "";
+  background-color: green;
+  position: absolute;
+  right: (-35px / 2);
+  top: calc(9rem / 1.15);
+  width: 35px;
+  height: 35px;
+  border-radius: 2rem;
+  z-index: 1;
 }
 
 .sidebar .burgerContainer .burgerTrigger {
-    content: "";
-    width: 35px;
-    height: 35px;
-    background-color: red;
-    cursor: pointer;
-    z-index: 6;
-    opacity: 0;
-    position: relative;
+  content: "";
+  width: 35px;
+  height: 35px;
+  background-color: red;
+  cursor: pointer;
+  z-index: 6;
+  opacity: 0;
+  position: relative;
 }
 
 .sidebar .burgerContainer .burgerMenu {
-    content: "";
-    background-color: green;
-    position: relative;
-    z-index: 1;
-    width: 20px;
-    height: 3px;
-    border-radius: 2rem;
-    bottom: calc(35px / 2);
-    left: 0.45rem;
-    transition: 0.5s all;
+  content: "";
+  background-color: green;
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 3px;
+  border-radius: 2rem;
+  bottom: calc(35px / 2);
+  left: 0.45rem;
+  transition: 0.5s all;
 }
 
 .sidebar .burgerContainer .burgerMenu::after {
-    content: "";
-    background-color: white;
-    position: absolute;
-    width: 20px;
-    height: 3px;
-    border-radius: 2rem;
-    top: 0.4rem;
-    transform: translateY(-0.4rem) rotate(45deg);
-    transition: 0.5s all;
+  content: "";
+  background-color: white;
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  border-radius: 2rem;
+  top: 0.4rem;
+  transform: translateY(-0.4rem) rotate(45deg);
+  transition: 0.5s all;
 }
 
 .sidebar .burgerContainer .burgerMenu::before {
-    content: "";
-    background-color: white;
-    position: absolute;
-    width: 20px;
-    height: 3px;
-    border-radius: 2rem;
-    top: -0.4rem;
-    transform: translateY(0.4rem) rotate(-45deg);
-    transition: 0.5s all;
+  content: "";
+  background-color: white;
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  border-radius: 2rem;
+  top: -0.4rem;
+  transform: translateY(0.4rem) rotate(-45deg);
+  transition: 0.5s all;
 }
 
 .sidebar .burgerContainer::after {
-    content: "";
-    position: absolute;
-    right: 35px;
-    top: (35px / 2);
-    z-index: 0;
-    width: calc(6rem + 15rem);
-    background-color: lightGrey;
-    height: 2px;
-    transition: 0.5s all;
+  content: "";
+  position: absolute;
+  right: 35px;
+  top: (35px / 2);
+  z-index: 0;
+  width: calc(6rem + 15rem);
+  background-color: lightGrey;
+  height: 2px;
+  transition: 0.5s all;
 }
 
 .sidebar .profileContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 3rem 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 3rem 0 0 0;
 }
 
 .sidebar .profileContainer img {
-    width: auto;
-    height: 3rem;
+  width: auto;
+  height: 3rem;
 }
 
 .sidebar .profileContainer .profileContents {
-    padding: 0 0 0 1rem;
+  padding: 0 0 0 1rem;
 }
 
 .sidebar .profileContainer .profileContents p.name {
-    padding: 0;
-    margin: 0;
-    font-size: 16.7px;
-    color: darkGrey;
-    text-transform: capitalize;
-    font-weight: heavyFont;
+  padding: 0;
+  margin: 0;
+  font-size: 16.7px;
+  color: darkGrey;
+  text-transform: capitalize;
+  font-weight: heavyFont;
 }
 
 .sidebar .profileContainer .profileContents p {
-    padding: 0;
-    margin: 0;
-    font-size: 13.9px;
-    color: darkGrey;
-    text-transform: lowercase;
+  padding: 0;
+  margin: 0;
+  font-size: 13.9px;
+  color: darkGrey;
+  text-transform: lowercase;
 }
 
 .sidebar .contentsContainer {
-    margin: 2rem 0 0 0;
+  margin: 2rem 0 0 0;
 }
 
 .sidebar .contentsContainer ul {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar .contentsContainer ul li {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: row;
-    margin: 0.75rem 0;
-    padding: 0.75rem 0;
-    width: 100%;
-    border-radius: 1rem;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin: 0.75rem 0;
+  padding: 0.75rem 0;
+  width: 100%;
+  border-radius: 1rem;
+  cursor: pointer;
 }
 
 .sidebar .contentsContainer ul li img {
-    padding: 0 1rem 0 0.5rem;
+  padding: 0 1rem 0 0.5rem;
 }
 
 .sidebar .contentsContainer ul li a {
-    text-decoration: none;
-    color: darkGrey;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 0 0 0.5rem;
+  text-decoration: none;
+  color: darkGrey;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 0 0.5rem;
 }
 
 .sidebar .contentsContainer ul li.active {
-    background-color: veryLightGreen;
+  background-color: veryLightGreen;
 }
 
 .sidebar .contentsContainer ul li.active a {
-    color: green;
+  color: green;
 }
 
 .sidebar .contentsContainer ul li:hover {
-    background-color: lightGrey;
-    transition: 0.25s;
+  background-color: lightGrey;
+  transition: 0.25s;
 }
 
 .sidebar.active {
-    width: 3rem;
-    transition: 0.5s all;
+  width: 3rem;
+  transition: 0.5s all;
 }
 
 .sidebar.active .logoContainer h2.title {
-    opacity: 0;
+  opacity: 0;
 }
 
 .sidebar.active .burgerContainer .burgerMenu {
-    background-color: white;
-    transition: 0.5s all;
+  background-color: white;
+  transition: 0.5s all;
 }
 
 .sidebar.active .burgerContainer .burgerMenu::before {
-    transform: translateY(0rem) rotate(0deg);
-    transition: 0.5s all;
+  transform: translateY(0rem) rotate(0deg);
+  transition: 0.5s all;
 }
 
 .sidebar.active .burgerContainer .burgerMenu::after {
-    transform: translateY(0rem) rotate(0deg);
-    transition: 0.5s all;
+  transform: translateY(0rem) rotate(0deg);
+  transition: 0.5s all;
 }
 
 .sidebar.active .profileContainer .profileContents {
-    opacity: 0;
+  opacity: 0;
 }
 
 .sidebar.active .contentsContainer a {
-    opacity: 0;
+  opacity: 0;
 }

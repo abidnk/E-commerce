@@ -12,6 +12,8 @@ export default function AdminEdit() {
   const navigate = useNavigate();
   const { productId } = useParams();
   const [showAlert, setShowAlert] = useState(false);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
 
   // State to manage form data (Edit cheyynda sadanm vekkan)
   const [productData, setProductData] = useState({
@@ -42,7 +44,7 @@ export default function AdminEdit() {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await axios.get(`https://ecommerce-api.bridgeon.in/products/${productId}`);
+        const response = await axios.get(`${baseUrl}/products/${productId}`);
         const { data } = response;
         setProductData(data);
       } catch (error) {

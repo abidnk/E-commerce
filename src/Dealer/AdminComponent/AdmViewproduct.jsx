@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   MDBCard,
@@ -9,23 +8,22 @@ import {
   MDBCardImage,
   MDBBtn,
   MDBRow,
-  MDBCol
+  MDBCol,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {  selectToken  } from "../../redux/AuthSlice";
+import { selectToken } from "../../redux/AuthSlice";
 import axios from "axios";
 import AdmSpinner from "./AdmSpinner";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { selectProduct, setProducts } from "../../redux/ProdctSlice";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
-
 function AdmViewproduct() {
   const token = useSelector(selectToken);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const products = useSelector(selectProduct);
   const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
@@ -60,14 +58,11 @@ function AdmViewproduct() {
 
   const deleteProduct = async (productId, token) => {
     try {
-      const response = await axios.delete(
-        `${baseUrl}/products/${productId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.delete(`${baseUrl}/products/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const { status, message } = response.data;
       if (status === "success") {
         // Successfully deleted the product.
@@ -81,42 +76,44 @@ function AdmViewproduct() {
       console.error("Error:", error.message);
     }
   };
- 
-const handleDelete = (productId) => {
-  Swal.fire({
-    title: 'Are you sure?',
-    text: 'You are about to delete this product!',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#3085d6',
-    confirmButtonText: 'Yes, delete it!',
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      await deleteProduct(productId, token);
-      // Optionally, you can add additional actions after the deletion here.
-      Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
-    }
-  });
-};
- 
+
+  const handleDelete = (productId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to delete this product!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteProduct(productId, token);
+        // Optionally, you can add additional actions after the deletion here.
+        Swal.fire("Deleted!", "Your product has been deleted.", "success");
+      }
+    });
+  };
+
   return (
     <div>
       <h1 className="our">PRODUCTS DETAILS</h1>
       {products.length === 0 ? (
-        <AdmSpinner/>
+        <AdmSpinner />
       ) : (
         <MDBRow>
           {products.map((item) => (
             <MDBCol md="4" key={item.id}>
               <MDBCard>
-                <MDBCardImage src={item.image} position='top' alt='...' />
+                <MDBCardImage src={item.image} position="top" alt="..." />
                 <MDBCardBody>
                   <MDBCardTitle>{item.title}</MDBCardTitle>
-                 
+
                   <MDBCardSubTitle>price:₹ {item.price}</MDBCardSubTitle>
                   <Link to={`/admedit/${item._id}`}>
-                    <MDBBtn style={{ backgroundColor: "black", width: "100%" }}>Edit Product</MDBBtn>
+                    <MDBBtn style={{ backgroundColor: "black", width: "100%" }}>
+                      Edit Product
+                    </MDBBtn>
                   </Link>
                   <MDBBtn
                     className="mt-2"

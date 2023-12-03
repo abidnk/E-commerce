@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -16,17 +16,15 @@ import {
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { selectToken } from "../../redux/AuthSlice";
 import { useSelector } from "react-redux";
 
 export default function AdmUserProfile() {
-
   const navigate = useNavigate();
   const { id } = useParams();
   const userToken = useSelector(selectToken);
   const baseUrl = import.meta.env.VITE_BASE_URL;
-
 
   const findUserById = async (userId, token) => {
     try {
@@ -36,14 +34,14 @@ export default function AdmUserProfile() {
         },
       });
       const { status, message, data } = response.data;
-      if (status === 'success') {
+      if (status === "success") {
         // Successfully fetched the user.
-        console.log('Fetched user details:', data);
+        console.log("Fetched user details:", data);
       } else {
-        console.error('User retrieval failed. Message:', message);
+        console.error("User retrieval failed. Message:", message);
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
     }
   };
 
@@ -205,10 +203,11 @@ export default function AdmUserProfile() {
                 <MDBCol md="6">
                   <MDBCard className="mb-4 mb-md-0">
                     <MDBCardBody>
-                      <MDBCardImage style={{    width: "219px",
-                        marginLeft: "61px"}} 
-                        src={item.product.image} alt="Image Description">
-                      </MDBCardImage>
+                      <MDBCardImage
+                        style={{ width: "219px", marginLeft: "61px" }}
+                        src={item.product.image}
+                        alt="Image Description"
+                      ></MDBCardImage>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
@@ -220,7 +219,7 @@ export default function AdmUserProfile() {
                         <span className="text-primary font-italic me-1">
                           Product
                         </span>{" "}
-                         Status
+                        Status
                       </MDBCardText>
                       <MDBCardText
                         className="mb-1"
@@ -255,7 +254,7 @@ export default function AdmUserProfile() {
                         className="mt-4 mb-1"
                         style={{ fontSize: ".77rem" }}
                       >
-                        Product Quantity 
+                        Product Quantity
                       </MDBCardText>
                       <MDBCardText className="text-muted">
                         {item.product.quantity}
@@ -265,7 +264,7 @@ export default function AdmUserProfile() {
                         className="mt-4 mb-1"
                         style={{ fontSize: ".77rem" }}
                       >
-                        Delevery Status 
+                        Delevery Status
                       </MDBCardText>
                       <MDBProgress className="rounded">
                         <MDBProgressBar
@@ -284,4 +283,5 @@ export default function AdmUserProfile() {
       </MDBContainer>
     </section>
   );
-}0
+}
+0;

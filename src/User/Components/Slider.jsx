@@ -3,10 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  selectProduct,
-  setProducts,
-} from "../../redux/ProdctSlice";
+import { selectProduct, setProducts } from "../../redux/ProdctSlice";
 import axios from "axios";
 import {
   MDBContainer,
@@ -24,17 +21,17 @@ const responsive = [
   {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    slidesToSlide: 1, 
+    slidesToSlide: 1,
   },
   {
     breakpoint: { max: 1024, min: 768 },
     items: 3,
-    slidesToSlide: 1, 
+    slidesToSlide: 1,
   },
   {
     breakpoint: { max: 767, min: 464 },
     items: 2,
-    slidesToSlide: 1, 
+    slidesToSlide: 1,
   },
 ];
 
@@ -45,18 +42,20 @@ const Slider = () => {
   const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const apiKey = import.meta.env.VITE_API_KEY;
-const baseUrl = import.meta.env.VITE_BASE_URL;
-console.log(products,'hiiiii');
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  console.log(products, "hiiiii");
   const dealerToken = token;
 
   const getAllProducts = async (token) => {
     try {
-      const response = await axios.get(`${baseUrl}/products?accessKey=${apiKey}`
-, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${baseUrl}/products?accessKey=${apiKey}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const { status, message, data } = response.data;
       if (status === "success") {
         // Successfully fetched products.

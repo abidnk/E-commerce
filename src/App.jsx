@@ -20,11 +20,11 @@ import Error from "./User/Components/Error";
 
 const App = () => {
   const isAdmin = useSelector(selectAdminStatus);
-console.log(isAdmin);
+  console.log(isAdmin);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Register/>} />
+        <Route path="/" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/xfactor" element={<XfactorHome />} />
         <Route path="/elite" element={<EliteHome />} />
@@ -35,18 +35,19 @@ console.log(isAdmin);
         <Route path="/addtocart" element={<Cart />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/*" element={<Error/>} />
-        
-        {isAdmin?( 
-        <>
-        <Route path="/admuserlist" element={<AdmUserList />} />
-        <Route path="/admhome" element={<Adminhome />}/>
-        <Route path="/admadd" element={<AdmAdd />} />
-        <Route path="/admedit/:productId" element={<Adminedit />} />
-        <Route path="/admuserlist" element={<AdmUserList />} />
-        </>
-        ):("")}
-       
+        <Route path="/*" element={<Error />} />
+
+        {isAdmin ? (
+          <>
+            <Route path="/admuserlist" element={<AdmUserList />} />
+            <Route path="/admhome" element={<Adminhome />} />
+            <Route path="/admadd" element={<AdmAdd />} />
+            <Route path="/admedit/:productId" element={<Adminedit />} />
+            <Route path="/admuserlist" element={<AdmUserList />} />
+          </>
+        ) : (
+          ""
+        )}
       </Routes>
     </Router>
   );

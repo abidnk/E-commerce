@@ -14,7 +14,7 @@ import Footer from "./Footer";
 export default function Payment() {
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <MDBContainer
         className="paydown py-5"
         fluid
@@ -44,7 +44,6 @@ export default function Payment() {
                         id="form1"
                         type="text"
                         size="lg"
-                        
                       />
                     </div>
                   </div>
@@ -62,7 +61,6 @@ export default function Payment() {
                         id="form2"
                         type="text"
                         size="lg"
-                        
                       />
                     </div>
                   </div>
@@ -74,7 +72,6 @@ export default function Payment() {
                   id="form3"
                   type="text"
                   size="lg"
-                  
                 />
                 <MDBRow className="my-4">
                   <MDBCol size="7">
@@ -83,7 +80,6 @@ export default function Payment() {
                       id="form4"
                       type="text"
                       size="lg"
-                      
                     />
                   </MDBCol>
                   <MDBCol size="3">
@@ -113,7 +109,7 @@ export default function Payment() {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-      <Footer/>
+      <Footer />
     </>
   );
 }
