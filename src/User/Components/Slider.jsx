@@ -43,7 +43,6 @@ const Slider = () => {
   const [updatedProductData, setUpdatedProductData] = useState(null);
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  console.log(products, "hiiiii");
   const dealerToken = token;
 
   const getAllProducts = async (token) => {
@@ -77,9 +76,16 @@ const Slider = () => {
       });
     }
   };
+
+
+  
   useEffect(() => {
     getAllProducts(dealerToken);
   }, [updatedProductData]);
+
+
+
+
   console.log(products);
   return (
     <div className="parent">

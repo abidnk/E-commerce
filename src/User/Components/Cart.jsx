@@ -90,7 +90,7 @@ const Cart = () => {
       ) : (
         <section
           className="navu h-100 mt-5"
-          style={{ backgroundColor: "#eee" }}
+          style={{ backgroundColor: "#eee" }} 
         >
           <MDBContainer className="py-5 h-100">
             <MDBRow className="justify-content-center align-items-center h-100">
@@ -145,7 +145,7 @@ const Cart = () => {
                             </MDBCol>
 
                             <MDBCol md="1" lg="1" xl="1" className="text-end">
-                              <a href="#!" className="text-danger">
+                              <a className="text-danger">
                                 <MDBIcon
                                   onClick={() => deleteItem(item._id)}
                                   fas
